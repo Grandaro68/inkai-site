@@ -1,0 +1,60 @@
+<!-- ============ 4) cookies-settings.html ============ -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cookies Settings — INKAI</title>
+<style>
+body{margin:0;font:16px/1.6 Inter,system-ui,Arial,sans-serif;color:#fff;background:#0b0003}
+main{max-width:840px;margin:40px auto;padding:0 20px}
+h1,h2{font-family:Arial Black,Impact,sans-serif;text-transform:uppercase;letter-spacing:.02em}
+a{color:#BF0426}
+.toggle{display:flex;align-items:center;gap:10px;margin:10px 0}
+.save{margin-top:16px;padding:10px 16px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;border-radius:10px;cursor:pointer}
+.muted{opacity:.8}
+header,footer{max-width:840px;margin:0 auto;padding:18px 20px;opacity:.85}
+footer{border-top:1px solid rgba(255,255,255,.15);margin-top:40px}
+</style>
+</head>
+<body>
+<header class="muted"><a href="index.html">← Back to Home</a></header>
+<main>
+<h1>Cookies Settings</h1>
+<p>Choose which optional cookies you accept. Strictly necessary cookies are always on.</p>
+
+
+<div class="toggle">
+<input type="checkbox" id="analytics">
+<label for="analytics">Allow performance/analytics cookies</label>
+</div>
+
+
+<button class="save" id="saveBtn">Save preferences</button>
+<p id="status" class="muted" role="status" aria-live="polite" style="margin-top:10px"></p>
+</main>
+<footer class="muted">
+<a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a> · <a href="cookies.html">Cookies Policy</a> · <a href="cookies-settings.html">Cookies Settings</a>
+</footer>
+<script>
+// Simple consent store in a cookie
+function setCookie(name,value,days){
+const d=new Date(); d.setTime(d.getTime()+days*24*60*60*1000);
+document.cookie=name+"="+encodeURIComponent(value)+";expires="+d.toUTCString()+";path=/;SameSite=Lax";
+}
+function getCookie(name){
+return document.cookie.split('; ').find(r=>r.startsWith(name+'='))?.split('=')[1]
+}
+const analytics = document.getElementById('analytics');
+const saved = getCookie('inkai_consent');
+if(saved){
+try{ const obj=JSON.parse(decodeURIComponent(saved)); analytics.checked=!!obj.analytics; }catch(e){}
+}
+document.getElementById('saveBtn').addEventListener('click',()=>{
+const value=JSON.stringify({analytics:analytics.checked});
+setCookie('inkai_consent', value, 180);
+document.getElementById('status').textContent='Preferences saved.';
+});
+</script>
+</body>
+</html>
