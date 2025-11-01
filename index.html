@@ -14,8 +14,7 @@
        but fully original code/design.
     ============================== */
     :root{
-      /* Palette fournie */
-      --inkai-black:#0b0003; /* base ultra noire (dérivée) */
+      --inkai-black:#0b0003;
       --inkai-1:#260104;
       --inkai-2:#BF0426;
       --inkai-3:#730217;
@@ -43,25 +42,20 @@
     .nav{
       position:fixed; left:0; right:0; z-index:50;
       display:flex; justify-content:space-between; align-items:center;
-      padding:14px 22px; mix-blend-mode:normal;
+      padding:18px 28px;
       border-bottom:1px solid rgba(255,255,255,.08);
-      backdrop-filter:saturate(140%) blur(6px);
-      background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.15));
+      backdrop-filter:saturate(140%) blur(8px);
+      background: rgba(0,0,0,.55);
     }
     .nav a{
-      color:#fff;
-      text-decoration:none;
-      letter-spacing:.03em;
-      font-size:16px;        /* + grand qu'avant */
-      opacity:.95;
-      transition:opacity .2s ease;
+      color:#fff; text-decoration:none; letter-spacing:.03em;
+      font-size:18px; font-weight:500;
+      opacity:.95; transition:opacity .2s ease, background .2s ease;
+      padding:6px 8px; border-radius:8px;
     }
-
-    .nav a:hover{ opacity:1; }
-
-    .nav-left a{  margin-right:28px; }  /* avant: 22px */
-    .nav-right a{ margin-left:28px; }   /* avant: 22px */
-    .nav{ padding:16px 26px; }          /* un peu plus de hauteur */
+    .nav a:hover{ opacity:1; background:rgba(255,255,255,.06); }
+    .nav-left a{  margin-right:28px; }
+    .nav-right a{ margin-left:28px; }
 
     .nav-bottom{
       position:fixed; left:0; right:0; bottom:0; z-index:40;
@@ -75,32 +69,38 @@
     .nav-bottom .copy{ opacity:.8; }
 
     /* ===== Hero / Photo wall ===== */
-    .hero{
-      min-height:100dvh; position:relative; overflow:hidden;
-    }
+    .hero{ min-height:100dvh; position:relative; overflow:hidden; }
 
     .grid{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
-      gap:14px; padding:86px 18px 80px; /* top offset for fixed navs */
+      gap:26px;                               /* + d'espace entre photos */
+      padding:110px 28px 110px;               /* marge top/bottom plus généreuse */
+      max-width: 1400px;                      /* photos plus petites, grille centrée */
+      margin: 0 auto;
     }
 
     .tile{
-      position:relative; overflow:hidden; border-radius:8px;
-      background: #120007;
+      position:relative; overflow:hidden; border-radius:10px;
+      background:#120007;
       box-shadow: 0 0 0 1px rgba(255,255,255,.05) inset;
       transition: transform .4s ease, filter .4s ease, box-shadow .4s ease;
     }
     .tile img{
       width:100%;
-      height:auto;           /* garde le ratio original */
+      height:auto;            /* conserve le ratio d'origine */
       display:block;
-      /* AUCUN filtre = couleurs originales */
-      filter:none;
-      object-fit:initial;    /* pas de crop */
+      filter:none;            /* couleurs originales */
+      object-fit:initial;     /* pas de crop */
+      opacity:0;              /* fade-in au scroll */
+      transform: translateY(16px);
+      transition: opacity .7s ease, transform .7s ease, scale .35s ease;
     }
-
-    .tile:hover{ transform: scale(1.015); filter: drop-shadow(0 10px 30px rgba(191,4,54,.2)); }
+    .tile img.visible{
+      opacity:1;
+      transform: translateY(0);
+    }
+    .tile img:hover{ scale:1.03; }            /* zoom subtil au survol */
 
     /* Responsive spans to create a dynamic wall */
     .span-3{ grid-column: span 3; }
@@ -108,13 +108,17 @@
     .span-6{ grid-column: span 6; }
     .span-12{ grid-column: span 12; }
 
+    @media (max-width: 1200px){
+      .grid{ max-width: 1100px; gap:22px; }
+    }
     @media (max-width: 1024px){
       .span-6{ grid-column: span 12; }
       .span-4{ grid-column: span 6; }
       .span-3{ grid-column: span 6; }
+      .grid{ gap:18px; }
     }
     @media (max-width: 640px){
-      .grid{ gap:8px; padding-top:74px; padding-bottom:70px; }
+      .grid{ gap:12px; padding-top:90px; padding-bottom:90px; max-width: 95%; }
       .span-4, .span-3{ grid-column: span 12; }
     }
 
@@ -178,69 +182,67 @@
 
   <!-- Photo wall / Hero -->
   <header class="hero" role="banner">
-   <div class="grid">
-    <!-- INKAI PHOTO WALL -->
-    <!-- Ligne 1 : ouverture immersive -->
-    <div class="tile span-6"><img src="assets/images/photo_2025-11-01_23-29-04.jpg" alt="Inkai live"></div>
-    <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-29-11.jpg" alt="Inkai portrait"></div>
-    <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-29-15.jpg" alt="Inkai DJ booth"></div>
-  
-    <!-- Ligne 2 : intensité -->
-    <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-29-19.jpg" alt="Inkai red light"></div>
-    <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-29-23.jpg" alt="Inkai crowd"></div>
-    <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-29-26.jpg" alt="Inkai performance"></div>
-  
-    <!-- Ligne 3 : mix textures -->
-    <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-29-29.jpg" alt="Inkai cybercore"></div>
-    <div class="tile span-6"><img src="assets/images/photo_2025-11-01_23-29-37.jpg" alt="Inkai show"></div>
-    <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-29-42.jpg" alt="Inkai light effect"></div>
-  
-    <!-- Ligne 4 : alternance horizontale -->
-    <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-29-45.jpg" alt="Inkai stage"></div>
-    <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-29-49.jpg" alt="Inkai mix desk"></div>
-    <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-29-52.jpg" alt="Inkai club"></div>
-  
-    <!-- Ligne 5 : ambiance immersive -->
-    <div class="tile span-6"><img src="assets/images/photo_2025-11-01_23-29-56.jpg" alt="Inkai energy"></div>
-    <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-30-00.jpg" alt="Inkai red light 2"></div>
-    <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-30-03.jpg" alt="Inkai audience"></div>
-  
-    <!-- Ligne 6 -->
-    <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-07.jpg" alt="Inkai look"></div>
-    <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-11.jpg" alt="Inkai behind decks"></div>
-    <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-14.jpg" alt="Inkai laser"></div>
-  
-    <!-- Ligne 7 -->
-    <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-30-17.jpg" alt="Inkai smoke"></div>
-    <div class="tile span-6"><img src="assets/images/photo_2025-11-01_23-30-21.jpg" alt="Inkai wide shot"></div>
-    <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-30-26.jpg" alt="Inkai hands up"></div>
-  
-    <!-- Ligne 8 -->
-    <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-29.jpg" alt="Inkai red scene"></div>
-    <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-32.jpg" alt="Inkai detail"></div>
-    <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-36.jpg" alt="Inkai fire energy"></div>
-  
-    <!-- Ligne 9 -->
-    <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-30-39.jpg" alt="Inkai crowd 2"></div>
-    <div class="tile span-6"><img src="assets/images/photo_2025-11-01_23-30-43.jpg" alt="Inkai power"></div>
-    <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-30-47.jpg" alt="Inkai face"></div>
-  
-    <!-- Ligne 10 -->
-    <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-51.jpg" alt="Inkai movement"></div>
-    <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-54.jpg" alt="Inkai vibe"></div>
-    <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-58.jpg" alt="Inkai texture"></div>
-  
-    <!-- Ligne 11 : final crescendo -->
-    <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-31-02.jpg" alt="Inkai silhouette"></div>
-    <div class="tile span-6"><img src="assets/images/photo_2025-11-01_23-31-06.jpg" alt="Inkai finale"></div>
-    <div class="tile span-3"><img src="assets/images/photo_5780461119662132052_y.jpg" alt="Inkai close up"></div>
-  
-    <!-- Ligne 12 : bonus new photos -->
-    <div class="tile span-6"><img src="assets/images/photo_5780461119662132053_y.jpg" alt="Inkai neon red"></div>
-    <div class="tile span-6"><img src="assets/images/photo_5780461119662132054_y.jpg" alt="Inkai lightning"></div>
-  </div>
+    <div class="grid">
+      <!-- INKAI PHOTO WALL -->
+      <!-- Ligne 1 : ouverture immersive -->
+      <div class="tile span-6"><img src="assets/images/photo_2025-11-01_23-29-04.jpg" alt="Inkai live"></div>
+      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-29-11.jpg" alt="Inkai portrait"></div>
+      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-29-15.jpg" alt="Inkai DJ booth"></div>
 
+      <!-- Ligne 2 : intensité -->
+      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-29-19.jpg" alt="Inkai red light"></div>
+      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-29-23.jpg" alt="Inkai crowd"></div>
+      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-29-26.jpg" alt="Inkai performance"></div>
 
+      <!-- Ligne 3 : mix textures -->
+      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-29-29.jpg" alt="Inkai cybercore"></div>
+      <div class="tile span-6"><img src="assets/images/photo_2025-11-01_23-29-37.jpg" alt="Inkai show"></div>
+      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-29-42.jpg" alt="Inkai light effect"></div>
+
+      <!-- Ligne 4 : alternance horizontale -->
+      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-29-45.jpg" alt="Inkai stage"></div>
+      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-29-49.jpg" alt="Inkai mix desk"></div>
+      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-29-52.jpg" alt="Inkai club"></div>
+
+      <!-- Ligne 5 : ambiance immersive -->
+      <div class="tile span-6"><img src="assets/images/photo_2025-11-01_23-29-56.jpg" alt="Inkai energy"></div>
+      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-30-00.jpg" alt="Inkai red light 2"></div>
+      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-30-03.jpg" alt="Inkai audience"></div>
+
+      <!-- Ligne 6 -->
+      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-07.jpg" alt="Inkai look"></div>
+      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-11.jpg" alt="Inkai behind decks"></div>
+      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-14.jpg" alt="Inkai laser"></div>
+
+      <!-- Ligne 7 -->
+      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-30-17.jpg" alt="Inkai smoke"></div>
+      <div class="tile span-6"><img src="assets/images/photo_2025-11-01_23-30-21.jpg" alt="Inkai wide shot"></div>
+      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-30-26.jpg" alt="Inkai hands up"></div>
+
+      <!-- Ligne 8 -->
+      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-29.jpg" alt="Inkai red scene"></div>
+      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-32.jpg" alt="Inkai detail"></div>
+      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-36.jpg" alt="Inkai fire energy"></div>
+
+      <!-- Ligne 9 -->
+      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-30-39.jpg" alt="Inkai crowd 2"></div>
+      <div class="tile span-6"><img src="assets/images/photo_2025-11-01_23-30-43.jpg" alt="Inkai power"></div>
+      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-30-47.jpg" alt="Inkai face"></div>
+
+      <!-- Ligne 10 -->
+      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-51.jpg" alt="Inkai movement"></div>
+      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-54.jpg" alt="Inkai vibe"></div>
+      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-58.jpg" alt="Inkai texture"></div>
+
+      <!-- Ligne 11 : final crescendo -->
+      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-31-02.jpg" alt="Inkai silhouette"></div>
+      <div class="tile span-6"><img src="assets/images/photo_2025-11-01_23-31-06.jpg" alt="Inkai finale"></div>
+      <div class="tile span-3"><img src="assets/images/photo_5780461119662132052_y.jpg" alt="Inkai close up"></div>
+
+      <!-- Ligne 12 : bonus new photos -->
+      <div class="tile span-6"><img src="assets/images/photo_5780461119662132053_y.jpg" alt="Inkai neon red"></div>
+      <div class="tile span-6"><img src="assets/images/photo_5780461119662132054_y.jpg" alt="Inkai lightning"></div>
+    </div>
 
     <h1 class="brand" aria-label="INKAI">
       <span class="stroke">INKAI</span><br>
@@ -255,7 +257,6 @@
     <p>
       <a class="btn" href="https://soundcloud.com/inkaidj" target="_blank" rel="noopener" aria-label="Listen on SoundCloud">Listen on SoundCloud</a>
     </p>
-    <!-- Optional embedded player (replace URL if needed) -->
     <div style="margin-top:18px; aspect-ratio: 16/9; max-width:900px;">
       <iframe title="Inkai on SoundCloud" width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/inkaidj&color=%23BF0426&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
@@ -267,7 +268,6 @@
   <section id="tour" aria-labelledby="tour-title">
     <h2 id="tour-title">Tour</h2>
     <ul class="tour-list" aria-live="polite">
-      <!-- Exemple de dates; remplacez au fur et à mesure -->
       <li>
         <span class="tour-date">12.04.2025</span>
         <span>Brussels — Fuse</span>
@@ -292,7 +292,7 @@
     <p class="lead">For shows, press and management.</p>
     <p>
       <strong>Manager / Booker:</strong> Antoine Roblin <br/>
-      <a class="btn" href="mailto:contact@inkai.dj">antoine.roblin.pro@gmail.com</a>
+      <a class="btn" href="mailto:antoine.roblin.pro@gmail.com">antoine.roblin.pro@gmail.com</a>
     </p>
   </section>
 
@@ -309,5 +309,17 @@
     <div class="copy">© 2025 Woody Jacquier</div>
   </div>
 
+  <!-- Fade-in on scroll -->
+  <script>
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, {threshold:0.2});
+    document.querySelectorAll('.tile img').forEach(img=>obs.observe(img));
+  </script>
 </body>
 </html>
