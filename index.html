@@ -49,13 +49,19 @@
       background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.15));
     }
     .nav a{
-      color:#fff; text-decoration:none; letter-spacing:.02em; font-size:14px;
-      opacity:.9; transition:opacity .2s ease;
+      color:#fff;
+      text-decoration:none;
+      letter-spacing:.03em;
+      font-size:16px;        /* + grand qu'avant */
+      opacity:.95;
+      transition:opacity .2s ease;
     }
+
     .nav a:hover{ opacity:1; }
 
-    .nav-right a{ margin-left:22px; }
-    .nav-left a{ margin-right:22px; }
+    .nav-left a{  margin-right:28px; }  /* avant: 22px */
+    .nav-right a{ margin-left:28px; }   /* avant: 22px */
+    .nav{ padding:16px 26px; }          /* un peu plus de hauteur */
 
     .nav-bottom{
       position:fixed; left:0; right:0; bottom:0; z-index:40;
@@ -76,21 +82,24 @@
     .grid{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
-      gap:10px; padding:86px 18px 80px; /* top offset for fixed navs */
+      gap:14px; padding:86px 18px 80px; /* top offset for fixed navs */
     }
 
     .tile{
       position:relative; overflow:hidden; border-radius:8px;
-      background: #120007; aspect-ratio: 4 / 3;
+      background: #120007;
       box-shadow: 0 0 0 1px rgba(255,255,255,.05) inset;
       transition: transform .4s ease, filter .4s ease, box-shadow .4s ease;
     }
-    .tile img{ width:100%; height:100%; object-fit:cover; display:block; filter:saturate(0) contrast(1.05) brightness(.9); }
-    .tile::after{
-      content:""; position:absolute; inset:0; mix-blend-mode:screen; pointer-events:none;
-      background: radial-gradient(120% 100% at 100% 0%, rgba(191,4,54,.22), transparent 40%),
-                  radial-gradient(120% 100% at 0% 100%, rgba(115,2,23,.25), transparent 45%);
+    .tile img{
+      width:100%;
+      height:auto;           /* garde le ratio original */
+      display:block;
+      /* AUCUN filtre = couleurs originales */
+      filter:none;
+      object-fit:initial;    /* pas de crop */
     }
+
     .tile:hover{ transform: scale(1.015); filter: drop-shadow(0 10px 30px rgba(191,4,54,.2)); }
 
     /* Responsive spans to create a dynamic wall */
