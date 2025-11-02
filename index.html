@@ -4,22 +4,20 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>INKAI — Official Site</title>
-  <meta name="description" content="INKAI — DJ & producer. Cybercore, cyborg, futurist & feminine energy." />
+  <meta name="description" content="INKAI — DJ & producer. Cybercore, cyborg, futurist & feminine energy. Découvrez ses sets, dates et univers visuel." />
   <link rel="icon" href="/favicon.ico" />
 
-  <!-- Safe perf (n'altère pas le rendu) -->
+  <!-- Perf hints (n'altèrent pas le rendu) -->
   <link rel="preconnect" href="https://w.soundcloud.com" crossorigin>
   <link rel="preconnect" href="https://api.soundcloud.com" crossorigin>
   <link rel="preload" href="assets/fonts/Ethnocentric-Regular.otf" as="font" type="font/otf" crossorigin>
-  <link rel="preload" href="assets/images/Inkai_with_headphones_frontpage.jpg" as="image">
+  <link rel="preload" href="assets/images/Inkai_headphones_frontpage.png" as="image">
 
   <style>
     :root{
       --inkai-black:#0b0003;
       --inkai-1:#260104; --inkai-2:#BF0426; --inkai-3:#730217; --inkai-4:#590212; --inkai-5:#BF0436;
       --text:#ffffff; --muted:#c9c9c9;
-      --link-underline: rgba(255,255,255,.35);
-      --link-underline-hover: rgba(255,255,255,.8);
     }
     /* Titres Ethnocentric */
     @font-face{
@@ -34,7 +32,7 @@
       -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
     }
 
-    /* ===== NAV (style "Fred again.." : liens fins, soulignés) ===== */
+    /* ===== NAV ===== */
     .nav{
       position:fixed; left:0; right:0; z-index:50;
       display:flex; justify-content:space-between; align-items:center;
@@ -42,16 +40,11 @@
       background: rgba(0,0,0,.55); backdrop-filter: blur(8px);
     }
     .nav a{
-      color:#fff; text-decoration:none; letter-spacing:.02em; font-size:18px; font-weight:500;
-      padding:6px 0; margin:0 18px; opacity:.95; position:relative;
+      color:#fff; text-decoration:none; letter-spacing:.03em; font-size:18px; font-weight:500;
+      padding:6px 8px; border-radius:8px; opacity:.95; transition:opacity .2s, background .2s;
     }
-    .nav a::after{
-      content:""; display:block; height:1px; background:var(--link-underline);
-      transform:scaleX(1); transition:background .2s, transform .2s, opacity .2s;
-    }
-    .nav a:hover{ opacity:1; }
-    .nav a:hover::after{ background:var(--link-underline-hover); transform:scaleX(1); }
-    .nav-left a:first-child{ margin-left:0; } .nav-right a:last-child{ margin-right:0; }
+    .nav a:hover{ opacity:1; background:rgba(255,255,255,.06); }
+    .nav-left a{ margin-right:28px; } .nav-right a{ margin-left:28px; }
 
     /* ===== HERO (vidéo + logo centré) ===== */
     .hero{ padding-top:110px; padding-bottom:60px; }
@@ -60,13 +53,13 @@
       box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
       background:#000;
     }
-    /* IMPORTANT : pas d'aspect-ratio forcé → pas de rognage */
     .media-wrap video{ width:100%; height:auto; display:block; object-fit:contain; }
 
-    /* Logo centré sur la vidéo */
+    /* Logo parfaitement centré sur la vidéo */
     .logo-overlay{
       position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-      width:100%; text-align:center; pointer-events:none;
+      width:100%;
+      text-align:center; pointer-events:none;
       font-family:'Ethnocentric', Inter, sans-serif;
       font-size: clamp(42px, 11vw, 160px);
       line-height:.9; text-transform:uppercase;
@@ -85,7 +78,7 @@
     .lead{ color:var(--muted); margin:0 0 18px; }
     p{ line-height:1.7; margin:0 0 14px; }
 
-    /* ===== BOUTONS (pour le contenu seulement) ===== */
+    /* ===== BOUTONS ===== */
     .btn{
       display:inline-flex; align-items:center; gap:10px; cursor:pointer; text-decoration:none; color:#fff;
       padding:12px 16px; border-radius:12px; border:1px solid rgba(255,255,255,.18);
@@ -95,7 +88,7 @@
     }
     .btn:hover{ transform:translateY(-1px); border-color:rgba(255,255,255,.35); }
 
-    /* ===== PHOTO (aucune déformation) ===== */
+    /* ===== PHOTO ===== */
     .single-photo{ max-width:980px; margin:26px auto 90px; padding:0 20px; }
     .single-photo img{
       width:100%; height:auto; display:block; border-radius:14px;
@@ -110,7 +103,7 @@
     }
     .date-item{ color:var(--muted); min-width:160px; font-variant-numeric: tabular-nums; }
 
-    /* ===== FOOTER (même typo/trait que header) ===== */
+    /* ===== FOOTER ===== */
     .nav-bottom{
       position:fixed; left:0; right:0; bottom:0; z-index:40;
       display:flex; justify-content:space-between; align-items:center;
@@ -118,50 +111,34 @@
       background: linear-gradient(0deg, rgba(0,0,0,.55), rgba(0,0,0,.15));
       font-size:12px;
     }
-    .nav-bottom .legal a{
-      color:#fff; text-decoration:none; letter-spacing:.02em; font-size:14px; font-weight:500;
-      margin-right:18px; padding:6px 0; opacity:.85; position:relative;
-    }
-    .nav-bottom .legal a::after{
-      content:""; display:block; height:1px; background:var(--link-underline); transform:scaleX(1);
-      transition:background .2s, transform .2s, opacity .2s;
-    }
-    .nav-bottom .legal a:hover{ opacity:1; }
-    .nav-bottom .legal a:hover::after{ background:var(--link-underline-hover); }
+    .nav-bottom .legal a{ color:#fff; opacity:.8; text-decoration:none; margin-right:12px; }
+    .nav-bottom .legal a:hover{ opacity:1; text-decoration:underline; }
     .nav-bottom .copy{ opacity:.8; }
     .spacer{ height:100px; }
   </style>
 </head>
 <body>
 
-  <!-- (temporaire) purge SW/caches pour éviter l'ancien design -->
-  <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister()));
-    if (window.caches) caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
-  }
-  </script>
-
   <!-- NAV -->
   <nav class="nav" aria-label="Primary">
     <div class="nav-left">
       <a href="#listen">listen</a>
-      <a href="#dates">dates</a>
+      <a href="#dates">dates</a> <!-- ex-TOUR -->
       <a href="#booking">booking & contact</a>
     </div>
     <div class="nav-right">
-      <a href="https://soundcloud.com/inkaidj" target="_blank" rel="noopener">soundcloud</a>
-      <a href="https://www.instagram.com/inkaidj" target="_blank" rel="noopener">instagram</a>
+      <a href="https://soundcloud.com/inkaidj" target="_blank" rel="noopener noreferrer">soundcloud</a>
+      <a href="https://www.instagram.com/inkaidj" target="_blank" rel="noopener noreferrer">instagram</a>
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO: VIDÉO + LOGO CENTRÉ -->
   <header class="hero" role="banner">
     <div class="media-wrap">
       <video
-        src="assets/images/Inkai_futuristic_female_dj_character.mp4"
+        src="assets/images/Inkai_birth_frontpage.MOV"
         autoplay muted loop playsinline preload="metadata"
-        poster="assets/images/Inkai_with_headphones_frontpage.jpg"
+        poster="assets/images/Inkai_headphones_frontpage.png"
         aria-label="Inkai teaser video">
       </video>
 
@@ -175,21 +152,20 @@
   <!-- BIO -->
   <section id="bio" aria-labelledby="bio-title">
     <h2 id="bio-title">Bio</h2>
-    <p>Inkai est une DJ et productrice née en Sibérie et basée entre Bruxelles et Paris. Son univers mêle hard techno, techno-trance et textures industrielles, avec des BPM rapides (145–160) et une énergie hard groove puissante.</p>
-    <p>Ses sets sont conçus comme une expérience de transe hypnotique et viscérale, où rythmes frénétiques, explosions sonores et voix existentielles se combinent pour créer une intensité émotionnelle rare.</p>
-    <p>Sur scène, Inkai incarne une présence minimaliste et envoûtante, entre force brute et introspection, inspirée par un mysticisme moderne et la philosophie du pouvoir collectif.</p>
-    <p class="lead">Inkai transforme chaque set en rituel sonore : énergique, hypnotique et libérateur.</p>
+    <p>Inkai is a DJ and producer born in Siberia and based between Brussels and Paris. Her universe blends hard techno, techno-trance, and industrial textures, with fast BPMs (145–160) and a powerful hard groove energy.</p>
+    <p>Her sets are designed as a hypnotic and visceral trance experience, where frenetic rhythms, explosive sounds, and existential voices merge to create a rare emotional intensity.</p>
+    <p>On stage, Inkai embodies a minimalist and captivating presence — a balance between raw power and introspection — inspired by modern mysticism and the philosophy of collective power.</p>
+    <p class="lead">Inkai turns each set into a sonic ritual: energetic, hypnotic, and liberating.</p>
   </section>
 
   <!-- PHOTO -->
   <div class="single-photo">
-    <img src="assets/images/Inkai_with_headphones_frontpage.jpg" alt="Inkai with headphones">
+    <img src="assets/images/Inkai_headphones_frontpage.png" alt="Inkai headphones" loading="lazy" decoding="async">
   </div>
 
   <!-- LISTEN -->
   <section id="listen" aria-labelledby="listen-title">
     <h2 id="listen-title">Listen</h2>
-    <p class="lead">Stream the latest mixes & tracks.</p>
     <p>
       <a class="btn" href="https://soundcloud.com/inkaidj" target="_blank" rel="noopener" aria-label="Listen on SoundCloud">Listen on SoundCloud</a>
     </p>
@@ -201,11 +177,12 @@
     </div>
   </section>
 
-  <!-- DATES -->
+  <!-- DATES (ex-TOUR) -->
   <section id="dates" aria-labelledby="dates-title">
     <h2 id="dates-title">Dates</h2>
     <ul class="dates-list" aria-live="polite" style="max-width:980px;margin:0 auto;">
-      <li><span class="date-item">12.04.2025</span><span>Brussels — Café Central</span><a class="btn" href="#">Event</a></li>
+      <li> <span class="date-item">TBA soon</span>
+      <!-- <li><span class="date-item">12.04.2025</span><span>Brussels — Café Central</span><a class="btn" href="#">Event</a></li> -->
     </ul>
   </section>
 
@@ -215,7 +192,7 @@
     <p class="lead" style="max-width:980px;margin:0 auto 18px;">For shows, press and management.</p>
     <p style="max-width:980px;margin:0 auto;">
       <strong>Manager / Booker:</strong> Antoine Roblin<br/>
-      <a class="btn" href="mailto:antoine.roblin.pro@gmail.com">antoine.roblin.pro@gmail.com</a>
+      <a class="btn" href="mailto:inkaidj.management@gmail.com">inkaidj.management@gmail.com</a>
     </p>
   </section>
 
