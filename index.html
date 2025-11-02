@@ -182,67 +182,113 @@
 
   <!-- Photo wall / Hero -->
   <header class="hero" role="banner">
-    <div class="grid">
-      <!-- INKAI PHOTO WALL -->
-      <!-- Ligne 1 : ouverture immersive -->
-      <div class="tile span-6"><img src="assets/images/photo_2025-11-01_23-29-04.jpg" alt="Inkai live"></div>
-      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-29-11.jpg" alt="Inkai portrait"></div>
-      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-29-15.jpg" alt="Inkai DJ booth"></div>
-
-      <!-- Ligne 2 : intensité -->
-      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-29-19.jpg" alt="Inkai red light"></div>
-      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-29-23.jpg" alt="Inkai crowd"></div>
-      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-29-26.jpg" alt="Inkai performance"></div>
-
-      <!-- Ligne 3 : mix textures -->
-      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-29-29.jpg" alt="Inkai cybercore"></div>
-      <div class="tile span-6"><img src="assets/images/photo_2025-11-01_23-29-37.jpg" alt="Inkai show"></div>
-      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-29-42.jpg" alt="Inkai light effect"></div>
-
-      <!-- Ligne 4 : alternance horizontale -->
-      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-29-45.jpg" alt="Inkai stage"></div>
-      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-29-49.jpg" alt="Inkai mix desk"></div>
-      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-29-52.jpg" alt="Inkai club"></div>
-
-      <!-- Ligne 5 : ambiance immersive -->
-      <div class="tile span-6"><img src="assets/images/photo_2025-11-01_23-29-56.jpg" alt="Inkai energy"></div>
-      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-30-00.jpg" alt="Inkai red light 2"></div>
-      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-30-03.jpg" alt="Inkai audience"></div>
-
-      <!-- Ligne 6 -->
-      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-07.jpg" alt="Inkai look"></div>
-      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-11.jpg" alt="Inkai behind decks"></div>
-      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-14.jpg" alt="Inkai laser"></div>
-
-      <!-- Ligne 7 -->
-      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-30-17.jpg" alt="Inkai smoke"></div>
-      <div class="tile span-6"><img src="assets/images/photo_2025-11-01_23-30-21.jpg" alt="Inkai wide shot"></div>
-      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-30-26.jpg" alt="Inkai hands up"></div>
-
-      <!-- Ligne 8 -->
-      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-29.jpg" alt="Inkai red scene"></div>
-      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-32.jpg" alt="Inkai detail"></div>
-      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-36.jpg" alt="Inkai fire energy"></div>
-
-      <!-- Ligne 9 -->
-      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-30-39.jpg" alt="Inkai crowd 2"></div>
-      <div class="tile span-6"><img src="assets/images/photo_2025-11-01_23-30-43.jpg" alt="Inkai power"></div>
-      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-30-47.jpg" alt="Inkai face"></div>
-
-      <!-- Ligne 10 -->
-      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-51.jpg" alt="Inkai movement"></div>
-      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-54.jpg" alt="Inkai vibe"></div>
-      <div class="tile span-4"><img src="assets/images/photo_2025-11-01_23-30-58.jpg" alt="Inkai texture"></div>
-
-      <!-- Ligne 11 : final crescendo -->
-      <div class="tile span-3"><img src="assets/images/photo_2025-11-01_23-31-02.jpg" alt="Inkai silhouette"></div>
-      <div class="tile span-6"><img src="assets/images/photo_2025-11-01_23-31-06.jpg" alt="Inkai finale"></div>
-      <div class="tile span-3"><img src="assets/images/photo_5780461119662132052_y.jpg" alt="Inkai close up"></div>
-
-      <!-- Ligne 12 : bonus new photos -->
-      <div class="tile span-6"><img src="assets/images/photo_5780461119662132053_y.jpg" alt="Inkai neon red"></div>
-      <div class="tile span-6"><img src="assets/images/photo_5780461119662132054_y.jpg" alt="Inkai lightning"></div>
-    </div>
+  <!-- ====== PHOTO/VIDEO WALL ====== -->
+  <div class="grid" id="inkai-grid"></div>
+  
+  <style>
+    /* Vidéos: mêmes règles que les images */
+    .tile video{
+      width:100%;
+      height:auto;           /* pas de crop */
+      display:block;
+      border-radius:10px;
+      opacity:0;             /* fade-in */
+      transform: translateY(16px);
+      transition: opacity .7s ease, transform .7s ease, scale .35s ease;
+    }
+    .tile video.visible{ opacity:1; transform: translateY(0); }
+    .tile video:hover{ scale:1.03; }
+  </style>
+  
+  <script>
+    /* ===============================
+       1) Liste tes médias ICI (images + vidéos)
+       - type: "img" ou "video"
+       - src: chemin du fichier dans assets/images/
+       - span: 3,4,6 (largeur dans la grille)
+       - alt: pour l’accessibilité (images)
+       =============================== */
+    const MEDIA = [
+      // ---- IMAGES (exemples; remplace par ton set réduit) ----
+      { type:"img",   src:"assets/images/photo_2025-11-01_23-29-23.jpg", span:6, alt:"Inkai live" },
+      { type:"img",   src:"assets/images/photo_2025-11-01_23-30-11.jpg", span:3, alt:"Inkai portrait" },
+      { type:"img",   src:"assets/images/photo_2025-11-01_23-29-15.jpg", span:3, alt:"Inkai DJ booth" },
+      { type:"img",   src:"assets/images/photo_2025-11-01_23-30-24.jpg", span:6, alt:"Inkai show" },
+      { type:"img",   src:"assets/images/photo_2025-11-01_23-30-43.jpg", span:4, alt:"Inkai stage" },
+      { type:"img",   src:"assets/images/photo_2025-11-01_23-30-51.jpg", span:4, alt:"Inkai desk" },
+      { type:"img",   src:"assets/images/photo_2025-11-01_23-28-56.jpg", span:6, alt:"Inkai power" },
+  
+      // ---- VIDÉOS (ajoute les tiennes) ----
+      { type:"video", src:"assets/images/social_u3833238557_A_hyper_realistic_futuristic_female_character.mp4", span:6 },
+      // Remplace le nom ci-dessous par le 2e fichier vidéo présent dans ton dossier
+      { type:"video", src:"assets/images/social_u3833238557_A_hyper_realistic_futuristic_female_character2.mp4", span:6 },
+  
+      // ---- Autres images si besoin ----
+      { type:"img",   src:"assets/images/photo_2025-11-01_23-30-54.jpg", span:4, alt:"Inkai vibe" },
+      { type:"img",   src:"assets/images/photo_2025-11-01_23-31-06.jpg", span:6, alt:"Inkai finale" },
+    ];
+  
+    /* ===============================
+       2) Génération auto du mur
+       =============================== */
+    const grid = document.getElementById('inkai-grid');
+    const spanClass = n => `span-${Math.max(3, Math.min(12, n))}`;
+  
+    MEDIA.forEach(item => {
+      const tile = document.createElement('div');
+      tile.className = `tile ${spanClass(item.span || 4)}`;
+  
+      if(item.type === 'video'){
+        const v = document.createElement('video');
+        v.src = item.src;
+        v.muted = true;       // indispensable pour autoplay
+        v.loop = true;
+        v.autoplay = true;
+        v.playsInline = true;
+        v.preload = "metadata";
+        // Optionnel: v.poster = "assets/images/poster.jpg";
+        tile.appendChild(v);
+      } else {
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.alt || "Inkai";
+        img.loading = "lazy";
+        img.decoding = "async";
+        tile.appendChild(img);
+      }
+  
+      grid.appendChild(tile);
+    });
+  
+    /* ===============================
+       3) Effet fade-in commun (images + vidéos)
+       =============================== */
+    const fadeObs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('visible');
+          fadeObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+  
+    document.querySelectorAll('#inkai-grid img, #inkai-grid video')
+      .forEach(el => fadeObs.observe(el));
+  
+    /* ===============================
+       4) Lecture/pause auto des vidéos
+       =============================== */
+    const playObs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        const v = e.target;
+        if(e.isIntersecting){ v.play().catch(()=>{}); }
+        else { v.pause(); }
+      });
+    }, { threshold: 0.6 }); // 60% dans le viewport
+  
+    document.querySelectorAll('#inkai-grid video')
+      .forEach(v => playObs.observe(v));
+  </script>
 
     <h1 class="brand" aria-label="INKAI">
       <span class="stroke">INKAI</span><br>
