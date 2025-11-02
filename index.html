@@ -7,7 +7,7 @@
   <meta name="description" content="INKAI — DJ & producer. Cybercore, cyborg, futurist & feminine energy." />
   <link rel="icon" href="/favicon.ico" />
 
-  <!-- Perf safe: préconnexions + préchargements (n'altèrent pas le rendu) -->
+  <!-- Safe perf (n'altère pas le rendu) -->
   <link rel="preconnect" href="https://w.soundcloud.com" crossorigin>
   <link rel="preconnect" href="https://api.soundcloud.com" crossorigin>
   <link rel="preload" href="assets/fonts/Ethnocentric-Regular.otf" as="font" type="font/otf" crossorigin>
@@ -18,6 +18,8 @@
       --inkai-black:#0b0003;
       --inkai-1:#260104; --inkai-2:#BF0426; --inkai-3:#730217; --inkai-4:#590212; --inkai-5:#BF0436;
       --text:#ffffff; --muted:#c9c9c9;
+      --link-underline: rgba(255,255,255,.35);
+      --link-underline-hover: rgba(255,255,255,.8);
     }
     /* Titres Ethnocentric */
     @font-face{
@@ -32,22 +34,24 @@
       -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
     }
 
-    /* ===== NAV ===== */
+    /* ===== NAV (style "Fred again.." : liens fins, soulignés) ===== */
     .nav{
       position:fixed; left:0; right:0; z-index:50;
       display:flex; justify-content:space-between; align-items:center;
       padding:18px 28px; border-bottom:1px solid rgba(255,255,255,.08);
       background: rgba(0,0,0,.55); backdrop-filter: blur(8px);
     }
-    /* Style commun H&F (légèrement agrandi) */
-    .pill{
-      color:#fff; text-decoration:none; letter-spacing:.03em;
-      font-size:20px; font-weight:600;
-      padding:8px 10px; border-radius:8px; opacity:.95;
-      transition:opacity .2s, background .2s;
+    .nav a{
+      color:#fff; text-decoration:none; letter-spacing:.02em; font-size:18px; font-weight:500;
+      padding:6px 0; margin:0 18px; opacity:.95; position:relative;
     }
-    .pill:hover{ opacity:1; background:rgba(255,255,255,.06); }
-    .nav-left .pill{  margin-right:28px; } .nav-right .pill{ margin-left:28px; }
+    .nav a::after{
+      content:""; display:block; height:1px; background:var(--link-underline);
+      transform:scaleX(1); transition:background .2s, transform .2s, opacity .2s;
+    }
+    .nav a:hover{ opacity:1; }
+    .nav a:hover::after{ background:var(--link-underline-hover); transform:scaleX(1); }
+    .nav-left a:first-child{ margin-left:0; } .nav-right a:last-child{ margin-right:0; }
 
     /* ===== HERO (vidéo + logo centré) ===== */
     .hero{ padding-top:110px; padding-bottom:60px; }
@@ -56,13 +60,13 @@
       box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
       background:#000;
     }
+    /* IMPORTANT : pas d'aspect-ratio forcé → pas de rognage */
     .media-wrap video{ width:100%; height:auto; display:block; object-fit:contain; }
 
-    /* Logo parfaitement centré sur la vidéo */
+    /* Logo centré sur la vidéo */
     .logo-overlay{
       position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-      width:100%;
-      text-align:center; pointer-events:none;
+      width:100%; text-align:center; pointer-events:none;
       font-family:'Ethnocentric', Inter, sans-serif;
       font-size: clamp(42px, 11vw, 160px);
       line-height:.9; text-transform:uppercase;
@@ -81,7 +85,7 @@
     .lead{ color:var(--muted); margin:0 0 18px; }
     p{ line-height:1.7; margin:0 0 14px; }
 
-    /* ===== BOUTONS (contenu) ===== */
+    /* ===== BOUTONS (pour le contenu seulement) ===== */
     .btn{
       display:inline-flex; align-items:center; gap:10px; cursor:pointer; text-decoration:none; color:#fff;
       padding:12px 16px; border-radius:12px; border:1px solid rgba(255,255,255,.18);
@@ -91,7 +95,7 @@
     }
     .btn:hover{ transform:translateY(-1px); border-color:rgba(255,255,255,.35); }
 
-    /* ===== PHOTO ===== */
+    /* ===== PHOTO (aucune déformation) ===== */
     .single-photo{ max-width:980px; margin:26px auto 90px; padding:0 20px; }
     .single-photo img{
       width:100%; height:auto; display:block; border-radius:14px;
@@ -106,7 +110,7 @@
     }
     .date-item{ color:var(--muted); min-width:160px; font-variant-numeric: tabular-nums; }
 
-    /* ===== FOOTER ===== */
+    /* ===== FOOTER (même typo/trait que header) ===== */
     .nav-bottom{
       position:fixed; left:0; right:0; bottom:0; z-index:40;
       display:flex; justify-content:space-between; align-items:center;
@@ -114,27 +118,44 @@
       background: linear-gradient(0deg, rgba(0,0,0,.55), rgba(0,0,0,.15));
       font-size:12px;
     }
-    .nav-bottom .legal .pill{ margin-right:12px; }  /* même style que header */
+    .nav-bottom .legal a{
+      color:#fff; text-decoration:none; letter-spacing:.02em; font-size:14px; font-weight:500;
+      margin-right:18px; padding:6px 0; opacity:.85; position:relative;
+    }
+    .nav-bottom .legal a::after{
+      content:""; display:block; height:1px; background:var(--link-underline); transform:scaleX(1);
+      transition:background .2s, transform .2s, opacity .2s;
+    }
+    .nav-bottom .legal a:hover{ opacity:1; }
+    .nav-bottom .legal a:hover::after{ background:var(--link-underline-hover); }
     .nav-bottom .copy{ opacity:.8; }
     .spacer{ height:100px; }
   </style>
 </head>
 <body>
 
+  <!-- (temporaire) purge SW/caches pour éviter l'ancien design -->
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister()));
+    if (window.caches) caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
+  }
+  </script>
+
   <!-- NAV -->
   <nav class="nav" aria-label="Primary">
     <div class="nav-left">
-      <a class="pill" href="#listen">listen</a>
-      <a class="pill" href="#dates">dates</a> <!-- ex-TOUR -->
-      <a class="pill" href="#booking">booking & contact</a>
+      <a href="#listen">listen</a>
+      <a href="#dates">dates</a>
+      <a href="#booking">booking & contact</a>
     </div>
     <div class="nav-right">
-      <a class="pill" href="https://soundcloud.com/inkaidj" target="_blank" rel="noopener">soundcloud</a>
-      <a class="pill" href="https://www.instagram.com/inkaidj" target="_blank" rel="noopener">instagram</a>
+      <a href="https://soundcloud.com/inkaidj" target="_blank" rel="noopener">soundcloud</a>
+      <a href="https://www.instagram.com/inkaidj" target="_blank" rel="noopener">instagram</a>
     </div>
   </nav>
 
-  <!-- HERO: VIDÉO + LOGO CENTRÉ -->
+  <!-- HERO -->
   <header class="hero" role="banner">
     <div class="media-wrap">
       <video
@@ -180,7 +201,7 @@
     </div>
   </section>
 
-  <!-- DATES (ex-TOUR) -->
+  <!-- DATES -->
   <section id="dates" aria-labelledby="dates-title">
     <h2 id="dates-title">Dates</h2>
     <ul class="dates-list" aria-live="polite" style="max-width:980px;margin:0 auto;">
@@ -203,10 +224,10 @@
   <!-- FOOTER -->
   <div class="nav-bottom" aria-label="Secondary">
     <div class="legal">
-      <a class="pill" href="privacy.html">Privacy Policy</a>
-      <a class="pill" href="terms.html">Terms of Use</a>
-      <a class="pill" href="cookies.html">Cookies Policy</a>
-      <a class="pill" href="cookies-settings.html">Cookies Settings</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Use</a>
+      <a href="cookies.html">Cookies Policy</a>
+      <a href="cookies-settings.html">Cookies Settings</a>
     </div>
     <div class="copy">© 2025 Woody Jacquier</div>
   </div>
