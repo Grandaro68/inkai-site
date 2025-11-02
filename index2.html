@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>INKAI — Official Site</title>
+  <meta name="description" content="INKAI — DJ & producer. Cybercore, cyborg, futurist & feminine energy. Découvrez ses sets, dates et univers visuel." />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Perf: connexions anticipées (fonts locales + SoundCloud) -->
+  <link rel="preconnect" href="https://w.soundcloud.com" crossorigin>
+  <link rel="preconnect" href="https://api.soundcloud.com" crossorigin>
+
+  <!-- Perf: préchargements utiles -->
+  <link rel="preload" href="assets/fonts/Ethnocentric-Regular.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="assets/images/Inkai_headphones_frontpage.png" as="image">
+
+  <style>
+    :root{
+      --inkai-black:#0b0003;
+      --inkai-1:#260104; --inkai-2:#BF0426; --inkai-3:#730217; --inkai-4:#590212; --inkai-5:#BF0436;
+      --text:#ffffff; --muted:#c9c9c9;
+    }
+    /* Titres Ethnocentric */
+    @font-face{
+      font-family:'Ethnocentric';
+      src:url('assets/fonts/Ethnocentric-Regular.otf') format('opentype');
+      font-display:swap;
+    }
+
+    html,body{
+      margin:0; padding:0; background:var(--inkai-black); color:var(--text);
+      font-family: Inter, Roboto, Helvetica, Arial, system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    }
+
+    /* ===== NAV ===== */
+    .nav{
+      position:fixed; left:0; right:0; z-index:50;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:18px 28px; border-bottom:1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.55); backdrop-filter: blur(8px);
+    }
+    .nav a{
+      color:#fff; text-decoration:none; letter-spacing:.03em;
+      /* ++ Boutons plus gros au header */
+      font-size:20px; font-weight:600;
+      padding:10px 14px; border-radius:12px;
+      opacity:.95; transition:opacity .2s, background .2s, transform .2s, border-color .2s;
+      border:1px solid rgba(255,255,255,.18);
+      background: linear-gradient(180deg, rgba(191,4,38,.22), rgba(89,2,18,.22));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+    .nav a:hover{ opacity:1; background:rgba(255,255,255,.10); transform:translateY(-1px); border-color:rgba(255,255,255,.35); }
+    .nav-left a{  margin-right:18px; } .nav-right a{ margin-left:18px; }
+
+    /* ===== HERO (vidéo + logo centré) ===== */
+    .hero{ padding-top:110px; padding-bottom:60px; }
+    .media-wrap{
+      position:relative; max-width:980px; margin:0 auto; border-radius:14px; overflow:hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
+      background:#000;
+      /* Stabilise la hauteur (réduit le CLS) */
+      aspect-ratio: 16 / 9;
+    }
+    .media-wrap video{ width:100%; height:100%; display:block; object-fit:cover; }
+
+    /* Logo parfaitement centré sur la vidéo */
+    .logo-overlay{
+      position:absolute; inset:0; display:grid; place-items:center;
+      text-align:center; pointer-events:none;
+      font-family:'Ethnocentric', Inter, sans-serif;
+      font-size: clamp(42px, 11vw, 160px);
+      line-height:.9; text-transform:uppercase;
+      mix-blend-mode:screen;
+      filter: drop-shadow(0 8px 26px rgba(0,0,0,.7));
+    }
+    .logo-overlay .stroke{ color:transparent; -webkit-text-stroke: 2px #fff; opacity:.95; }
+    .logo-overlay .fill{ color:#fff; opacity:.10; display:block; margin-top:-.1em; }
+
+    /* ===== TITRES & TEXTE ===== */
+    h1,h2,h3{
+      font-family:'Ethnocentric', Inter, sans-serif;
+      text-transform:uppercase; letter-spacing:.04em; margin:14px 0;
+    }
+    section{ max-width:980px; margin:26px auto; padding:0 20px; }
+    .lead{ color:var(--muted); margin:0 0 18px; }
+    p{ line-height:1.7; margin:0 0 14px; }
+
+    /* ===== BOUTONS réutilisables ===== */
+    .btn{
+      display:inline-flex; align-items:center; gap:10px; cursor:pointer; text-decoration:none; color:#fff;
+      padding:12px 16px; border-radius:12px; border:1px solid rgba(255,255,255,.18);
+      background: linear-gradient(180deg, rgba(191,4,38,.22), rgba(89,2,18,.22));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+      transition: transform .2s ease, background .2s ease, border-color .2s ease, opacity .2s ease;
+      font-weight:600;
+    }
+    .btn:hover{ transform:translateY(-1px); border-color:rgba(255,255,255,.35); opacity:1; }
+
+    /* ===== PHOTO ===== */
+    .single-photo{ max-width:980px; margin:26px auto 90px; padding:0 20px; }
+    .single-photo img{
+      width:100%; height:auto; display:block; border-radius:14px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
+      /* Stabilise la zone d'image (CLS) sans changer le fichier */
+      aspect-ratio: 3 / 2;
+    }
+
+    /* ===== DATES (ex-TOUR) ===== */
+    .dates-list{ list-style:none; padding:0; margin:14px 0 0; border-top:1px solid rgba(255,255,255,.08); }
+    .dates-list li{
+      display:flex; gap:18px; justify-content:space-between; align-items:center;
+      border-bottom:1px solid rgba(255,255,255,.08); padding:16px 0;
+    }
+    .date-item{ color:var(--muted); min-width:160px; font-variant-numeric: tabular-nums; }
+
+    /* ===== FOOTER ===== */
+    .nav-bottom{
+      position:fixed; left:0; right:0; bottom:0; z-index:40;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:10px 18px; border-top:1px solid rgba(255,255,255,.08);
+      background: linear-gradient(0deg, rgba(0,0,0,.55), rgba(0,0,0,.15));
+      font-size:12px;
+    }
+    /* même style que les boutons du header pour le footer */
+    .nav-bottom .legal a{ margin-right:12px; }
+    .nav-bottom .copy{ opacity:.9; font-weight:600; }
+    .spacer{ height:100px; }
+  </style>
+</head>
+<body>
+
+  <!-- Enregistre un Service Worker (cache des assets & pages) -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(()=>{});
+      });
+    }
+  </script>
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="Primary">
+    <div class="nav-left">
+      <a href="#listen" class="btn">listen</a>
+      <a href="#dates" class="btn">dates</a>
+      <a href="#booking" class="btn">booking & contact</a>
+    </div>
+    <div class="nav-right">
+      <a href="https://soundcloud.com/inkaidj" target="_blank" rel="noopener" class="btn">soundcloud</a>
+      <a href="https://www.instagram.com/inkaidj" target="_blank" rel="noopener" class="btn">instagram</a>
+    </div>
+  </nav>
+
+  <!-- HERO: VIDÉO + LOGO CENTRÉ -->
+  <header class="hero" role="banner">
+    <div class="media-wrap">
+      <video
+        src="assets/images/Inkai_birth_frontpage.MOV"
+        autoplay muted loop playsinline preload="metadata"
+        poster="assets/images/Inkai_headphones_frontpage.png"
+        aria-label="Inkai teaser video">
+      </video>
+
+      <div class="logo-overlay" aria-hidden="true">
+        <span class="stroke">INKAI</span>
+        <span class="fill">INKAI</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- BIO -->
+  <section id="bio" aria-labelledby="bio-title">
+    <h2 id="bio-title">Bio</h2>
+    <p>Inkai is a DJ and producer born in Siberia and based between Brussels and Paris. Her universe blends hard techno, techno-trance, and industrial textures, with fast BPMs (145–160) and a powerful hard groove energy.</p>
+    <p>Her sets are designed as a hypnotic and visceral trance experience, where frenetic rhythms, explosive sounds, and existential voices merge to create a rare emotional intensity.</p>
+    <p>On stage, Inkai embodies a minimalist and captivating presence — a balance between raw power and introspection — inspired by modern mysticism and the philosophy of collective power.</p>
+    <p class="lead">Inkai turns each set into a sonic ritual: energetic, hypnotic, and liberating.</p>
+  </section>
+
+  <!-- PHOTO -->
+  <div class="single-photo">
+    <img src="assets/images/Inkai_headphones_frontpage.png" alt="Inkai headphones">
+  </div>
+
+  <!-- LISTEN -->
+  <section id="listen" aria-labelledby="listen-title">
+    <h2 id="listen-title">Listen</h2>
+    <p>
+      <a class="btn" href="https://soundcloud.com/inkaidj" target="_blank" rel="noopener" aria-label="Listen on SoundCloud">Listen on SoundCloud</a>
+    </p>
+    <div style="margin-top:18px; aspect-ratio:16/9; max-width:980px;">
+      <iframe title="Inkai on SoundCloud" width="100%" height="100%" loading="lazy"
+        scrolling="no" frameborder="0" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/inkaidj&color=%23BF0426&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- DATES (ex-TOUR) -->
+  <section id="dates" aria-labelledby="dates-title">
+    <h2 id="dates-title">Dates</h2>
+    <ul class="dates-list" aria-live="polite" style="max-width:980px;margin:0 auto;">
+      <li> <span class="date-item">TBA soon</span> </li>
+      <!-- <li><span class="date-item">12.04.2025</span><span>Brussels — Café Central</span><a class="btn" href="#">Event</a></li> -->
+    </ul>
+  </section>
+
+  <!-- BOOKING -->
+  <section id="booking" aria-labelledby="booking-title">
+    <h2 id="booking-title">Booking & contact</h2>
+    <p class="lead" style="max-width:980px;margin:0 auto 18px;">For shows, press and management.</p>
+    <p style="max-width:980px;margin:0 auto;">
+      <strong>Manager / Booker:</strong> Antoine Roblin<br/>
+      <a class="btn" href="mailto:inkaidj.management@gmail.com">inkaidj.management@gmail.com</a>
+    </p>
+  </section>
+
+  <div class="spacer"></div>
+
+  <!-- FOOTER -->
+  <div class="nav-bottom" aria-label="Secondary">
+    <div class="legal">
+      <!-- mêmes styles que le header -->
+      <a class="btn" href="privacy.html">Privacy Policy</a>
+      <a class="btn" href="terms.html">Terms of Use</a>
+      <a class="btn" href="cookies.html">Cookies Policy</a>
+      <a class="btn" href="cookies-settings.html">Cookies Settings</a>
+    </div>
+    <div class="copy">© 2025 Woody Jacquier</div>
+  </div>
+
+</body>
+</html>
