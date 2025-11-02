@@ -11,17 +11,22 @@
     :root{
       --inkai-black:#0b0003;
       --inkai-1:#260104; --inkai-2:#BF0426; --inkai-3:#730217; --inkai-4:#590212; --inkai-5:#BF0436;
-      --text:#ffffff; --muted:#bdbdbd;
+      --text:#ffffff; --muted:#c9c9c9;
     }
+    /* Titres Ethnocentric */
     @font-face{
       font-family:'Ethnocentric';
       src:url('assets/fonts/Ethnocentric-Regular.otf') format('opentype');
       font-display:swap;
     }
-    html,body{ margin:0; padding:0; background:var(--inkai-black); color:var(--text);
-      font-family: Inter, Roboto, Helvetica, Arial, system-ui, -apple-system, sans-serif; }
 
-    /* ====== NAV ====== */
+    html,body{
+      margin:0; padding:0; background:var(--inkai-black); color:var(--text);
+      font-family: Inter, Roboto, Helvetica, Arial, system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    }
+
+    /* ===== NAV ===== */
     .nav{
       position:fixed; left:0; right:0; z-index:50;
       display:flex; justify-content:space-between; align-items:center;
@@ -35,55 +40,64 @@
     .nav a:hover{ opacity:1; background:rgba(255,255,255,.06); }
     .nav-left a{  margin-right:28px; } .nav-right a{ margin-left:28px; }
 
-    /* ====== HERO CENTRÉ (VIDÉO + LOGO) ====== */
-    .hero{
-      padding-top:110px;      /* espace sous la nav */
-      padding-bottom:60px;
-    }
+    /* ===== HERO (vidéo + logo centré) ===== */
+    .hero{ padding-top:110px; padding-bottom:60px; }
     .media-wrap{
-      position:relative;
-      max-width: 980px;       /* largeur de la vidéo */
-      margin: 0 auto;         /* centre horizontalement */
-      border-radius:14px; overflow:hidden;
+      position:relative; max-width:980px; margin:0 auto; border-radius:14px; overflow:hidden;
       box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
       background:#000;
     }
-    .media-wrap video{
-      width:100%; height:auto; display:block;
-      filter:none; object-fit:contain;
-    }
-    /* Logo projeté par-dessus la vidéo */
+    .media-wrap video{ width:100%; height:auto; display:block; object-fit:contain; }
+
+    /* Logo parfaitement centré sur la vidéo */
     .logo-overlay{
-      position:absolute; inset:auto 0 8%;      /* centré en bas */
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      width:100%;
       text-align:center; pointer-events:none;
       font-family:'Ethnocentric', Inter, sans-serif;
       font-size: clamp(42px, 11vw, 160px);
       line-height:.9; text-transform:uppercase;
-      mix-blend-mode:screen;                   /* effet “projection” */
+      mix-blend-mode:screen;
       filter: drop-shadow(0 8px 26px rgba(0,0,0,.7));
     }
     .logo-overlay .stroke{ color:transparent; -webkit-text-stroke: 2px #fff; opacity:.95; }
     .logo-overlay .fill{ color:#fff; opacity:.10; display:block; margin-top:-.1em; }
 
-    /* ====== BIO ====== */
-    section{ max-width: 980px; margin: 26px auto; padding: 0 20px; }
-    #bio h2{
-      font-family:'Ethnocentric', Inter, sans-serif; text-transform:uppercase;
-      letter-spacing:.04em; font-size: clamp(22px, 3vw, 34px); margin:14px 0;
+    /* ===== TITRES & TEXTE ===== */
+    h1,h2,h3{
+      font-family:'Ethnocentric', Inter, sans-serif;
+      text-transform:uppercase; letter-spacing:.04em; margin:14px 0;
     }
-    #bio p{ color:#e9e9e9; line-height:1.7; margin:0 0 14px; }
-    #bio p.muted{ color:var(--muted); }
+    section{ max-width:980px; margin:26px auto; padding:0 20px; }
+    .lead{ color:var(--muted); margin:0 0 18px; }
+    p{ line-height:1.7; margin:0 0 14px; }
 
-    /* ====== PHOTO UNIQUE ====== */
-    .single-photo{
-      max-width: 980px; margin: 26px auto 90px; padding: 0 20px;
+    /* ===== BOUTONS ===== */
+    .btn{
+      display:inline-flex; align-items:center; gap:10px; cursor:pointer; text-decoration:none; color:#fff;
+      padding:12px 16px; border-radius:12px; border:1px solid rgba(255,255,255,.18);
+      background: linear-gradient(180deg, rgba(191,4,38,.22), rgba(89,2,18,.22));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
     }
+    .btn:hover{ transform:translateY(-1px); border-color:rgba(255,255,255,.35); }
+
+    /* ===== PHOTO ===== */
+    .single-photo{ max-width:980px; margin:26px auto 90px; padding:0 20px; }
     .single-photo img{
       width:100%; height:auto; display:block; border-radius:14px;
       box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
     }
 
-    /* ====== FOOTER ====== */
+    /* ===== DATES (ex-TOUR) ===== */
+    .dates-list{ list-style:none; padding:0; margin:14px 0 0; border-top:1px solid rgba(255,255,255,.08); }
+    .dates-list li{
+      display:flex; gap:18px; justify-content:space-between; align-items:center;
+      border-bottom:1px solid rgba(255,255,255,.08); padding:16px 0;
+    }
+    .date-item{ color:var(--muted); min-width:160px; font-variant-numeric: tabular-nums; }
+
+    /* ===== FOOTER ===== */
     .nav-bottom{
       position:fixed; left:0; right:0; bottom:0; z-index:40;
       display:flex; justify-content:space-between; align-items:center;
@@ -103,7 +117,7 @@
   <nav class="nav" aria-label="Primary">
     <div class="nav-left">
       <a href="#listen">listen</a>
-      <a href="#tour">tour</a>
+      <a href="#dates">dates</a> <!-- ex-TOUR -->
       <a href="#booking">booking & contact</a>
     </div>
     <div class="nav-right">
@@ -112,7 +126,7 @@
     </div>
   </nav>
 
-  <!-- HERO VIDÉO CENTRÉE + LOGO -->
+  <!-- HERO: VIDÉO + LOGO CENTRÉ -->
   <header class="hero" role="banner">
     <div class="media-wrap">
       <video
@@ -135,15 +149,15 @@
     <p>Inkai est une DJ et productrice née en Sibérie et basée entre Bruxelles et Paris. Son univers mêle hard techno, techno-trance et textures industrielles, avec des BPM rapides (145–160) et une énergie hard groove puissante.</p>
     <p>Ses sets sont conçus comme une expérience de transe hypnotique et viscérale, où rythmes frénétiques, explosions sonores et voix existentielles se combinent pour créer une intensité émotionnelle rare.</p>
     <p>Sur scène, Inkai incarne une présence minimaliste et envoûtante, entre force brute et introspection, inspirée par un mysticisme moderne et la philosophie du pouvoir collectif.</p>
-    <p class="muted">Inkai transforme chaque set en rituel sonore : énergique, hypnotique et libérateur.</p>
+    <p class="lead">Inkai transforme chaque set en rituel sonore : énergique, hypnotique et libérateur.</p>
   </section>
 
-  <!-- PHOTO UNIQUE -->
+  <!-- PHOTO -->
   <div class="single-photo">
     <img src="assets/images/Inkai_with_headphones_frontpage.jpg" alt="Inkai with headphones">
   </div>
 
-  <!-- Listen -->
+  <!-- LISTEN -->
   <section id="listen" aria-labelledby="listen-title">
     <h2 id="listen-title">Listen</h2>
     <p class="lead">Stream the latest mixes & tracks.</p>
@@ -157,15 +171,15 @@
     </div>
   </section>
 
-  <!-- Tour -->
-  <section id="tour" aria-labelledby="tour-title">
-    <h2 id="tour-title">Tour</h2>
-    <ul class="tour-list" aria-live="polite" style="max-width:980px;margin:0 auto;">
-      <li><span class="tour-date">12.04.2025</span><span>Brussels — Café Central</span><a class="btn" href="#">Event</a></li>
+  <!-- DATES (ex-TOUR) -->
+  <section id="dates" aria-labelledby="dates-title">
+    <h2 id="dates-title">Dates</h2>
+    <ul class="dates-list" aria-live="polite" style="max-width:980px;margin:0 auto;">
+      <li><span class="date-item">12.04.2025</span><span>Brussels — Café Central</span><a class="btn" href="#">Event</a></li>
     </ul>
   </section>
 
-  <!-- Booking & Contact -->
+  <!-- BOOKING -->
   <section id="booking" aria-labelledby="booking-title">
     <h2 id="booking-title">Booking & contact</h2>
     <p class="lead" style="max-width:980px;margin:0 auto 18px;">For shows, press and management.</p>
