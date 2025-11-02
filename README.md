@@ -1,4 +1,4 @@
-# Inkai dj web site
+# Inkai DJ
 
 Web site is on maintenance ... will be back soon
 
