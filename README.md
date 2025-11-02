@@ -1,6 +1,6 @@
 # Inkai dj web site
 
-Web site is in maintenance ... will be back soon
+Web site is on maintenance ... will be back soon
 
 Inkai est une DJ et productrice née en Sibérie et basée entre Bruxelles et Paris.
 Son univers mêle hard techno, techno-trance et textures industrielles, avec des BPM rapides (145–160) et une énergie hard groove puissante.
