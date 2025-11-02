@@ -4,27 +4,16 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>INKAI — Official Site</title>
-  <meta name="description" content="INKAI — DJ & producer. Cybercore, cyborg, futurist & feminine energy." />
+  <meta name="description" content="INKAI — DJ & producer. Cybercore, cyborg, futurist & feminine energy. Découvrez ses sets, dates et univers visuel." />
   <link rel="icon" href="/favicon.ico" />
-  
+
   <style>
-    /* =============================
-       Inkai – Base Styles
-       Inspired by fredagain.com (photo wall + split nav),
-       but fully original code/design.
-    ============================== */
     :root{
       --inkai-black:#0b0003;
-      --inkai-1:#260104;
-      --inkai-2:#BF0426;
-      --inkai-3:#730217;
-      --inkai-4:#590212;
-      --inkai-5:#BF0436;
-      --text:#ffffff;
-      --muted:#bdbdbd;
+      --inkai-1:#260104; --inkai-2:#BF0426; --inkai-3:#730217; --inkai-4:#590212; --inkai-5:#BF0436;
+      --text:#ffffff; --muted:#c9c9c9;
     }
-
-    /* Ethnocentric — placez le fichier dans /assets/fonts/ */
+    /* Titres Ethnocentric */
     @font-face{
       font-family:'Ethnocentric';
       src:url('assets/fonts/Ethnocentric-Regular.otf') format('opentype');
@@ -32,31 +21,83 @@
     }
 
     html,body{
-      margin:0; padding:0; height:100%;
-      background: var(--inkai-black);
-      color: var(--text);
+      margin:0; padding:0; background:var(--inkai-black); color:var(--text);
       font-family: Inter, Roboto, Helvetica, Arial, system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
     }
 
-    /* ===== Split nav (top & bottom) ===== */
+    /* ===== NAV ===== */
     .nav{
       position:fixed; left:0; right:0; z-index:50;
       display:flex; justify-content:space-between; align-items:center;
-      padding:18px 28px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      backdrop-filter:saturate(140%) blur(8px);
-      background: rgba(0,0,0,.55);
+      padding:18px 28px; border-bottom:1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.55); backdrop-filter: blur(8px);
     }
     .nav a{
-      color:#fff; text-decoration:none; letter-spacing:.03em;
-      font-size:18px; font-weight:500;
-      opacity:.95; transition:opacity .2s ease, background .2s ease;
-      padding:6px 8px; border-radius:8px;
+      color:#fff; text-decoration:none; letter-spacing:.03em; font-size:18px; font-weight:500;
+      padding:6px 8px; border-radius:8px; opacity:.95; transition:opacity .2s, background .2s;
     }
     .nav a:hover{ opacity:1; background:rgba(255,255,255,.06); }
-    .nav-left a{  margin-right:28px; }
-    .nav-right a{ margin-left:28px; }
+    .nav-left a{  margin-right:28px; } .nav-right a{ margin-left:28px; }
 
+    /* ===== HERO (vidéo + logo centré) ===== */
+    .hero{ padding-top:110px; padding-bottom:60px; }
+    .media-wrap{
+      position:relative; max-width:980px; margin:0 auto; border-radius:14px; overflow:hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
+      background:#000;
+    }
+    .media-wrap video{ width:100%; height:auto; display:block; object-fit:contain; }
+
+    /* Logo parfaitement centré sur la vidéo */
+    .logo-overlay{
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      width:100%;
+      text-align:center; pointer-events:none;
+      font-family:'Ethnocentric', Inter, sans-serif;
+      font-size: clamp(42px, 11vw, 160px);
+      line-height:.9; text-transform:uppercase;
+      mix-blend-mode:screen;
+      filter: drop-shadow(0 8px 26px rgba(0,0,0,.7));
+    }
+    .logo-overlay .stroke{ color:transparent; -webkit-text-stroke: 2px #fff; opacity:.95; }
+    .logo-overlay .fill{ color:#fff; opacity:.10; display:block; margin-top:-.1em; }
+
+    /* ===== TITRES & TEXTE ===== */
+    h1,h2,h3{
+      font-family:'Ethnocentric', Inter, sans-serif;
+      text-transform:uppercase; letter-spacing:.04em; margin:14px 0;
+    }
+    section{ max-width:980px; margin:26px auto; padding:0 20px; }
+    .lead{ color:var(--muted); margin:0 0 18px; }
+    p{ line-height:1.7; margin:0 0 14px; }
+
+    /* ===== BOUTONS ===== */
+    .btn{
+      display:inline-flex; align-items:center; gap:10px; cursor:pointer; text-decoration:none; color:#fff;
+      padding:12px 16px; border-radius:12px; border:1px solid rgba(255,255,255,.18);
+      background: linear-gradient(180deg, rgba(191,4,38,.22), rgba(89,2,18,.22));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover{ transform:translateY(-1px); border-color:rgba(255,255,255,.35); }
+
+    /* ===== PHOTO ===== */
+    .single-photo{ max-width:980px; margin:26px auto 90px; padding:0 20px; }
+    .single-photo img{
+      width:100%; height:auto; display:block; border-radius:14px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
+    }
+
+    /* ===== DATES (ex-TOUR) ===== */
+    .dates-list{ list-style:none; padding:0; margin:14px 0 0; border-top:1px solid rgba(255,255,255,.08); }
+    .dates-list li{
+      display:flex; gap:18px; justify-content:space-between; align-items:center;
+      border-bottom:1px solid rgba(255,255,255,.08); padding:16px 0;
+    }
+    .date-item{ color:var(--muted); min-width:160px; font-variant-numeric: tabular-nums; }
+
+    /* ===== FOOTER ===== */
     .nav-bottom{
       position:fixed; left:0; right:0; bottom:0; z-index:40;
       display:flex; justify-content:space-between; align-items:center;
@@ -67,111 +108,16 @@
     .nav-bottom .legal a{ color:#fff; opacity:.8; text-decoration:none; margin-right:12px; }
     .nav-bottom .legal a:hover{ opacity:1; text-decoration:underline; }
     .nav-bottom .copy{ opacity:.8; }
-
-    /* ===== Hero / Photo wall ===== */
-    .hero{ min-height:100dvh; position:relative; overflow:hidden; }
-
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:52px;                               /* + d'espace entre photos */
-      padding:110px 28px 110px;               /* marge top/bottom plus généreuse */
-      max-width: 1200px;                      /* photos plus petites, grille centrée */
-      margin: 0 auto;
-    }
-
-    .tile{
-      position:relative; overflow:hidden; border-radius:10px;
-      background:#120007;
-      box-shadow: 0 0 0 1px rgba(255,255,255,.05) inset;
-      transition: transform .4s ease, filter .4s ease, box-shadow .4s ease;
-    }
-    .tile img{
-      width:100%;
-      height:auto;            /* conserve le ratio d'origine */
-      display:block;
-      filter:none;            /* couleurs originales */
-      object-fit:initial;     /* pas de crop */
-      opacity:0;              /* fade-in au scroll */
-      transform: translateY(16px);
-      transition: opacity .7s ease, transform .7s ease, scale .35s ease;
-    }
-    .tile img.visible{
-      opacity:1;
-      transform: translateY(0);
-    }
-    .tile img:hover{ scale:1.03; }            /* zoom subtil au survol */
-
-    /* Responsive spans to create a dynamic wall */
-    .span-3{ grid-column: span 3; }
-    .span-4{ grid-column: span 4; }
-    .span-6{ grid-column: span 6; }
-    .span-12{ grid-column: span 12; }
-
-    @media (max-width: 1200px){
-      .grid{ max-width: 1100px; gap:22px; }
-    }
-    @media (max-width: 1024px){
-      .span-6{ grid-column: span 12; }
-      .span-4{ grid-column: span 6; }
-      .span-3{ grid-column: span 6; }
-      .grid{ gap:18px; }
-    }
-    @media (max-width: 640px){
-      .grid{ gap:12px; padding-top:90px; padding-bottom:90px; max-width: 95%; }
-      .span-4, .span-3{ grid-column: span 12; }
-    }
-
-    /* ===== Overlay brand title ===== */
-    .brand{
-      position:absolute; inset:auto 0 18%; text-align:center; pointer-events:none; z-index:20;
-      font-family:'Ethnocentric', Inter, sans-serif; letter-spacing:.02em;
-      font-size: clamp(44px, 10vw, 160px);
-      line-height: .85; 
-      text-transform:uppercase;
-      filter: drop-shadow(0 6px 22px rgba(0,0,0,.75));
-    }
-    .brand .stroke{
-      color:transparent; -webkit-text-stroke: 2px #fff; text-stroke: 2px #fff; opacity:.9;
-    }
-    .brand .fill{ color:#fff; opacity:.12; }
-
-    /* ===== Sections ===== */
-    section{ padding:80px 18px; max-width:1100px; margin:0 auto; }
-    section h2{
-      font-family:'Ethnocentric', Inter, sans-serif; font-size: clamp(22px, 3vw, 34px);
-      text-transform:uppercase; margin:0 0 18px; letter-spacing:.04em;
-    }
-    .lead{ color:var(--muted); margin:0 0 18px; }
-
-    /* Buttons */
-    .btn{
-      display:inline-flex; align-items:center; gap:10px; cursor:pointer; text-decoration:none; color:#fff;
-      padding:12px 16px; border-radius:12px; border:1px solid rgba(255,255,255,.18);
-      background: linear-gradient(180deg, rgba(191,4,38,.22), rgba(89,2,18,.22));
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
-      transition: transform .2s ease, background .2s ease, border-color .2s ease;
-    }
-    .btn:hover{ transform:translateY(-1px); border-color:rgba(255,255,255,.35); }
-
-    /* Lists (Tour) */
-    .tour-list{ list-style:none; padding:0; margin:14px 0 0; border-top:1px solid rgba(255,255,255,.08); }
-    .tour-list li{
-      display:flex; gap:18px; justify-content:space-between; align-items:center;
-      border-bottom:1px solid rgba(255,255,255,.08); padding:16px 0;
-    }
-    .tour-date{ color:var(--muted); min-width:140px; font-variant-numeric: tabular-nums; }
-
-    /* Footer spacer to keep bottom nav visible */
     .spacer{ height:100px; }
   </style>
 </head>
 <body>
-  <!-- Top split nav -->
+
+  <!-- NAV -->
   <nav class="nav" aria-label="Primary">
     <div class="nav-left">
       <a href="#listen">listen</a>
-      <a href="#tour">tour</a>
+      <a href="#dates">dates</a> <!-- ex-TOUR -->
       <a href="#booking">booking & contact</a>
     </div>
     <div class="nav-right">
@@ -180,171 +126,72 @@
     </div>
   </nav>
 
-  <!-- Photo wall / Hero -->
+  <!-- HERO: VIDÉO + LOGO CENTRÉ -->
   <header class="hero" role="banner">
-  <!-- ====== PHOTO/VIDEO WALL ====== -->
-  <div class="grid" id="inkai-grid"></div>
-  
-  <style>
-    /* Vidéos: mêmes règles que les images */
-    .tile video{
-      width:100%;
-      height:auto;           /* pas de crop */
-      display:block;
-      border-radius:10px;
-      opacity:0;             /* fade-in */
-      transform: translateY(16px);
-      transition: opacity .7s ease, transform .7s ease, scale .35s ease;
-    }
-    .tile video.visible{ opacity:1; transform: translateY(0); }
-    .tile video:hover{ scale:1.03; }
-  </style>
-  
-  <script>
-    /* ===============================
-       1) Liste tes médias ICI (images + vidéos)
-       - type: "img" ou "video"
-       - src: chemin du fichier dans assets/images/
-       - span: 3,4,6 (largeur dans la grille)
-       - alt: pour l’accessibilité (images)
-       =============================== */
-    const MEDIA = [
-      // ---- IMAGES (exemples; remplace par ton set réduit) ----
-      { type:"img",   src:"assets/images/photo_2025-11-01_23-29-23.jpg", span:6, alt:"Inkai live" },
-      { type:"img",   src:"assets/images/photo_2025-11-01_23-30-11.jpg", span:3, alt:"Inkai portrait" },
-      { type:"img",   src:"assets/images/photo_2025-11-01_23-29-15.jpg", span:3, alt:"Inkai DJ booth" },
-      { type:"img",   src:"assets/images/photo_2025-11-01_23-30-24.jpg", span:6, alt:"Inkai show" },
-      { type:"img",   src:"assets/images/photo_2025-11-01_23-30-43.jpg", span:4, alt:"Inkai stage" },
-      { type:"img",   src:"assets/images/photo_2025-11-01_23-30-51.jpg", span:4, alt:"Inkai desk" },
-      { type:"img",   src:"assets/images/photo_2025-11-01_23-28-56.jpg", span:6, alt:"Inkai power" },
-  
-      // ---- VIDÉOS (ajoute les tiennes) ----
-      { type:"video", src:"assets/images/social_u3833238557_A_hyper_realistic_futuristic_female_character.mp4", span:6 },
-      // Remplace le nom ci-dessous par le 2e fichier vidéo présent dans ton dossier
-      { type:"video", src:"assets/images/social_u3833238557_A_hyper_realistic_futuristic_female_character2.mp4", span:6 },
-  
-      // ---- Autres images si besoin ----
-      { type:"img",   src:"assets/images/photo_2025-11-01_23-30-54.jpg", span:4, alt:"Inkai vibe" },
-      { type:"img",   src:"assets/images/photo_2025-11-01_23-31-06.jpg", span:6, alt:"Inkai finale" },
-    ];
-  
-    /* ===============================
-       2) Génération auto du mur
-       =============================== */
-    const grid = document.getElementById('inkai-grid');
-    const spanClass = n => `span-${Math.max(3, Math.min(12, n))}`;
-  
-    MEDIA.forEach(item => {
-      const tile = document.createElement('div');
-      tile.className = `tile ${spanClass(item.span || 4)}`;
-  
-      if(item.type === 'video'){
-        const v = document.createElement('video');
-        v.src = item.src;
-        v.muted = true;       // indispensable pour autoplay
-        v.loop = true;
-        v.autoplay = true;
-        v.playsInline = true;
-        v.preload = "metadata";
-        // Optionnel: v.poster = "assets/images/poster.jpg";
-        tile.appendChild(v);
-      } else {
-        const img = document.createElement('img');
-        img.src = item.src;
-        img.alt = item.alt || "Inkai";
-        img.loading = "lazy";
-        img.decoding = "async";
-        tile.appendChild(img);
-      }
-  
-      grid.appendChild(tile);
-    });
-  
-    /* ===============================
-       3) Effet fade-in commun (images + vidéos)
-       =============================== */
-    const fadeObs = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          e.target.classList.add('visible');
-          fadeObs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.2 });
-  
-    document.querySelectorAll('#inkai-grid img, #inkai-grid video')
-      .forEach(el => fadeObs.observe(el));
-  
-    /* ===============================
-       4) Lecture/pause auto des vidéos
-       =============================== */
-    const playObs = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        const v = e.target;
-        if(e.isIntersecting){ v.play().catch(()=>{}); }
-        else { v.pause(); }
-      });
-    }, { threshold: 0.6 }); // 60% dans le viewport
-  
-    document.querySelectorAll('#inkai-grid video')
-      .forEach(v => playObs.observe(v));
-  </script>
+    <div class="media-wrap">
+      <video
+        src="assets/images/Inkai_futuristic_female_dj_character.mp4"
+        autoplay muted loop playsinline preload="metadata"
+        poster="assets/images/Inkai_with_headphones_frontpage.jpg"
+        aria-label="Inkai teaser video">
+      </video>
 
-    <h1 class="brand" aria-label="INKAI">
-      <span class="stroke">INKAI</span><br>
-      <span class="fill">INKAI</span>
-    </h1>
+      <div class="logo-overlay" aria-hidden="true">
+        <span class="stroke">INKAI</span>
+        <span class="fill">INKAI</span>
+      </div>
+    </div>
   </header>
 
-  <!-- Listen -->
+  <!-- BIO -->
+  <section id="bio" aria-labelledby="bio-title">
+    <h2 id="bio-title">Bio</h2>
+    <p>Inkai est une DJ et productrice née en Sibérie et basée entre Bruxelles et Paris. Son univers mêle hard techno, techno-trance et textures industrielles, avec des BPM rapides (145–160) et une énergie hard groove puissante.</p>
+    <p>Ses sets sont conçus comme une expérience de transe hypnotique et viscérale, où rythmes frénétiques, explosions sonores et voix existentielles se combinent pour créer une intensité émotionnelle rare.</p>
+    <p>Sur scène, Inkai incarne une présence minimaliste et envoûtante, entre force brute et introspection, inspirée par un mysticisme moderne et la philosophie du pouvoir collectif.</p>
+    <p class="lead">Inkai transforme chaque set en rituel sonore : énergique, hypnotique et libérateur.</p>
+  </section>
+
+  <!-- PHOTO -->
+  <div class="single-photo">
+    <img src="assets/images/Inkai_with_headphones_frontpage.jpg" alt="Inkai with headphones">
+  </div>
+
+  <!-- LISTEN -->
   <section id="listen" aria-labelledby="listen-title">
     <h2 id="listen-title">Listen</h2>
-    <p class="lead">Stream the latest mixes & tracks.</p>
     <p>
       <a class="btn" href="https://soundcloud.com/inkaidj" target="_blank" rel="noopener" aria-label="Listen on SoundCloud">Listen on SoundCloud</a>
     </p>
-    <div style="margin-top:18px; aspect-ratio: 16/9; max-width:900px;">
+    <div style="margin-top:18px; aspect-ratio:16/9; max-width:980px;">
       <iframe title="Inkai on SoundCloud" width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/inkaidj&color=%23BF0426&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
       </iframe>
     </div>
   </section>
 
-  <!-- Tour -->
-  <section id="tour" aria-labelledby="tour-title">
-    <h2 id="tour-title">Tour</h2>
-    <ul class="tour-list" aria-live="polite">
-      <li>
-        <span class="tour-date">12.04.2025</span>
-        <span>Brussels — Fuse</span>
-        <a class="btn" href="#" aria-label="Tickets Brussels">Tickets</a>
-      </li>
-      <li>
-        <span class="tour-date">27.06.2025</span>
-        <span>Paris — Rex Club</span>
-        <a class="btn" href="#" aria-label="Tickets Paris">Tickets</a>
-      </li>
-      <li>
-        <span class="tour-date">15.08.2025</span>
-        <span>Berlin — Watergate</span>
-        <a class="btn" href="#" aria-label="Tickets Berlin">Tickets</a>
-      </li>
+  <!-- DATES (ex-TOUR) -->
+  <section id="dates" aria-labelledby="dates-title">
+    <h2 id="dates-title">Dates</h2>
+    <ul class="dates-list" aria-live="polite" style="max-width:980px;margin:0 auto;">
+      <li> <span class="date-item">TBA soon</span>
+      <!--<li><span class="date-item">12.04.2025</span><span>Brussels — Café Central</span><a class="btn" href="#">Event</a></li> -->
     </ul>
   </section>
 
-  <!-- Booking & Contact -->
+  <!-- BOOKING -->
   <section id="booking" aria-labelledby="booking-title">
     <h2 id="booking-title">Booking & contact</h2>
-    <p class="lead">For shows, press and management.</p>
-    <p>
-      <strong>Manager / Booker:</strong> Antoine Roblin <br/>
+    <p class="lead" style="max-width:980px;margin:0 auto 18px;">For shows, press and management.</p>
+    <p style="max-width:980px;margin:0 auto;">
+      <strong>Manager / Booker:</strong> Antoine Roblin<br/>
       <a class="btn" href="mailto:antoine.roblin.pro@gmail.com">antoine.roblin.pro@gmail.com</a>
     </p>
   </section>
 
   <div class="spacer"></div>
 
-  <!-- Bottom split nav -->
+  <!-- FOOTER -->
   <div class="nav-bottom" aria-label="Secondary">
     <div class="legal">
       <a href="privacy.html">Privacy Policy</a>
@@ -355,17 +202,5 @@
     <div class="copy">© 2025 Woody Jacquier</div>
   </div>
 
-  <!-- Fade-in on scroll -->
-  <script>
-    const obs = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          e.target.classList.add('visible');
-          obs.unobserve(e.target);
-        }
-      });
-    }, {threshold:0.2});
-    document.querySelectorAll('.tile img').forEach(img=>obs.observe(img));
-  </script>
 </body>
 </html>
