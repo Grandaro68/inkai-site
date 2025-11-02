@@ -5,99 +5,106 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Inkaï DJ — Official Site</title>
   <meta name="description" content="Inkaï is a Siberian-born DJ and producer based between Brussels and Paris. Her universe blends hard techno, techno-trance and industrial textures with fast BPMs (145–160) and a hypnotic, visceral energy." />
-  <link rel="icon" href="/favicon.ico" />
   <meta property="og:site_name" content="Inkaï DJ" />
-  <link rel="icon" href="assets/images/Inkai_headphones_frontpage.png" />
+  <link rel="icon" href="assets/images/Inkai_headphones_frontpage.png?v=20251103" />
 
-  <!-- Perf hints (n'altèrent pas le rendu) -->
+  <!-- Perf + cache-busting -->
   <link rel="preconnect" href="https://w.soundcloud.com" crossorigin>
   <link rel="preconnect" href="https://api.soundcloud.com" crossorigin>
-  <link rel="preload" href="assets/fonts/Ethnocentric-Regular.otf" as="font" type="font/otf" crossorigin>
-  <link rel="preload" href="assets/images/Inkai_headphones_frontpage.png" as="image">
+  <link rel="preload" href="assets/fonts/Ethnocentric-Regular.otf?v=20251103" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="assets/images/Inkai_headphones_frontpage.png?v=20251103" as="image">
 
   <style>
     :root{
       --inkai-black:#0b0003;
-      --inkai-1:#260104; --inkai-2:#BF0426; --inkai-3:#730217; --inkai-4:#590212; --inkai-5:#BF0436;
-      --text:#ffffff; --muted:#c9c9c9;
+      --inkai-ink:#BF0426;
+      --text:#ffffff;
+      --muted:#c9c9c9;
+      --maxw:980px;         /* largeur contenu */
+      --radius:14px;
     }
     /* Titres Ethnocentric */
     @font-face{
       font-family:'Ethnocentric';
-      src:url('assets/fonts/Ethnocentric-Regular.otf') format('opentype');
+      src:url('assets/fonts/Ethnocentric-Regular.otf?v=20251103') format('opentype');
       font-display:swap;
     }
-
     html,body{
       margin:0; padding:0; background:var(--inkai-black); color:var(--text);
       font-family: Inter, Roboto, Helvetica, Arial, system-ui, -apple-system, sans-serif;
       -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
     }
 
-    /* ===== NAV ===== */
+    /* ===== NAV (sobre, pas de "pills") ===== */
     .nav{
       position:fixed; left:0; right:0; z-index:50;
       display:flex; justify-content:space-between; align-items:center;
-      padding:18px 28px; border-bottom:1px solid rgba(255,255,255,.08);
+      padding:14px 24px; border-bottom:1px solid rgba(255,255,255,.08);
       background: rgba(0,0,0,.55); backdrop-filter: blur(8px);
     }
     .nav a{
-      color:#fff; text-decoration:none; letter-spacing:.03em; font-size:18px; font-weight:500;
-      padding:6px 8px; border-radius:8px; opacity:.95; transition:opacity .2s, background .2s;
+      color:#fff; text-decoration:none; font-size:16px; letter-spacing:.02em;
+      padding:4px 6px; margin:0 16px; border-radius:6px;
+      transition:opacity .2s ease; opacity:.95;
     }
-    .nav a:hover{ opacity:1; background:rgba(255,255,255,.06); }
-    .nav-left a{ margin-right:28px; } .nav-right a{ margin-left:28px; }
+    .nav a:hover{ opacity:1; }
+    .nav .right a{ margin-left:22px; }
+    .nav .left a{ margin-right:22px; }
 
     /* ===== HERO (vidéo + logo centré) ===== */
-    .hero{ padding-top:110px; padding-bottom:60px; }
+    .hero{ padding-top:96px; padding-bottom:40px; }
     .media-wrap{
-      position:relative; max-width:980px; margin:0 auto; border-radius:14px; overflow:hidden;
+      position:relative; max-width:var(--maxw); margin:0 auto;
+      overflow:hidden; border-radius:var(--radius);
       box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
       background:#000;
     }
-    .media-wrap video{ width:100%; height:auto; display:block; object-fit:contain; }
-
-    /* Logo parfaitement centré sur la vidéo */
+    .media-wrap video{
+      width:100%; height:auto; display:block;
+      object-fit:contain;           /* pas de crop */
+      background:#000;
+    }
+    /* Logo centré au milieu de la vidéo */
     .logo-overlay{
       position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-      width:100%;
-      text-align:center; pointer-events:none;
+      width:100%; text-align:center; pointer-events:none;
       font-family:'Ethnocentric', Inter, sans-serif;
-      font-size: clamp(42px, 11vw, 160px);
-      line-height:.9; text-transform:uppercase;
-      mix-blend-mode:screen;
-      filter: drop-shadow(0 8px 26px rgba(0,0,0,.7));
+      font-size:clamp(42px, 11vw, 160px); line-height:.9; text-transform:uppercase;
+      mix-blend-mode:screen; filter: drop-shadow(0 8px 26px rgba(0,0,0,.7));
     }
-    .logo-overlay .stroke{ color:transparent; -webkit-text-stroke: 2px #fff; opacity:.95; }
+    .logo-overlay .stroke{ color:transparent; -webkit-text-stroke:2px #fff; opacity:.95; }
     .logo-overlay .fill{ color:#fff; opacity:.10; display:block; margin-top:-.1em; }
 
-    /* ===== TITRES & TEXTE ===== */
+    /* ===== Contenus ===== */
     h1,h2,h3{
       font-family:'Ethnocentric', Inter, sans-serif;
       text-transform:uppercase; letter-spacing:.04em; margin:14px 0;
     }
-    section{ max-width:980px; margin:26px auto; padding:0 20px; }
-    .lead{ color:var(--muted); margin:0 0 18px; }
+    section{ max-width:var(--maxw); margin:26px auto; padding:0 20px; }
     p{ line-height:1.7; margin:0 0 14px; }
+    .lead{ color:var(--muted); margin-top:6px; }
 
-    /* ===== BOUTONS ===== */
+    /* Boutons dédiés (ne s’applique pas aux liens de nav/footer) */
     .btn{
       display:inline-flex; align-items:center; gap:10px; cursor:pointer; text-decoration:none; color:#fff;
-      padding:12px 16px; border-radius:12px; border:1px solid rgba(255,255,255,.18);
+      padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.18);
       background: linear-gradient(180deg, rgba(191,4,38,.22), rgba(89,2,18,.22));
       box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
-      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+      transition: transform .2s ease, border-color .2s ease;
     }
     .btn:hover{ transform:translateY(-1px); border-color:rgba(255,255,255,.35); }
 
-    /* ===== PHOTO ===== */
-    .single-photo{ max-width:980px; margin:26px auto 90px; padding:0 20px; }
+    /* Photo non-coupée */
+    .single-photo{ max-width:var(--maxw); margin:26px auto 90px; padding:0 20px; }
     .single-photo img{
-      width:100%; height:auto; display:block; border-radius:14px;
+      width:100%; height:auto; display:block;
+      border-radius:var(--radius);
       box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
+      object-fit:contain;            /* pas de crop */
+      background:#000;
     }
 
-    /* ===== DATES (ex-TOUR) ===== */
+    /* Dates */
     .dates-list{ list-style:none; padding:0; margin:14px 0 0; border-top:1px solid rgba(255,255,255,.08); }
     .dates-list li{
       display:flex; gap:18px; justify-content:space-between; align-items:center;
@@ -105,7 +112,7 @@
     }
     .date-item{ color:var(--muted); min-width:160px; font-variant-numeric: tabular-nums; }
 
-    /* ===== FOOTER ===== */
+    /* Footer (sobre) */
     .nav-bottom{
       position:fixed; left:0; right:0; bottom:0; z-index:40;
       display:flex; justify-content:space-between; align-items:center;
@@ -118,18 +125,15 @@
     .nav-bottom .copy{ opacity:.8; }
     .spacer{ height:100px; }
   </style>
-  
+
+  <!-- Logo/Name pour Google -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Inkaï DJ",
     "url": "https://inkaidj.com",
-    "logo": "https://inkaidj.com/assets/images/Inkai_headphones_frontpage.png",
-    "sameAs": [
-      "https://www.instagram.com/inkaidj",
-      "https://soundcloud.com/inkaidj"
-    ]
+    "logo": "https://inkaidj.com/assets/images/Inkai_headphones_frontpage.png"
   }
   </script>
 </head>
@@ -137,27 +141,26 @@
 
   <!-- NAV -->
   <nav class="nav" aria-label="Primary">
-    <div class="nav-left">
+    <div class="left">
       <a href="#listen">listen</a>
-      <a href="#dates">dates</a> <!-- ex-TOUR -->
+      <a href="#dates">dates</a>
       <a href="#booking">booking & contact</a>
     </div>
-    <div class="nav-right">
-      <a href="https://soundcloud.com/inkaidj" target="_blank" rel="noopener noreferrer">soundcloud</a>
-      <a href="https://www.instagram.com/inkaidj" target="_blank" rel="noopener noreferrer">instagram</a>
+    <div class="right">
+      <a href="https://soundcloud.com/inkaidj" target="_blank" rel="noopener">soundcloud</a>
+      <a href="https://www.instagram.com/inkaidj" target="_blank" rel="noopener">instagram</a>
     </div>
   </nav>
 
-  <!-- HERO: VIDÉO + LOGO CENTRÉ -->
+  <!-- HERO: vidéo + logo centré -->
   <header class="hero" role="banner">
     <div class="media-wrap">
       <video
-        src="assets/images/Inkai_birth_frontpage.MOV"
+        src="assets/images/Inkai_birth_frontpage.MOV?v=20251103"
         autoplay muted loop playsinline preload="metadata"
-        poster="assets/images/Inkai_headphones_frontpage.png"
+        poster="assets/images/Inkai_headphones_frontpage.png?v=20251103"
         aria-label="Inkai teaser video">
       </video>
-
       <div class="logo-overlay" aria-hidden="true">
         <span class="stroke">INKAI</span>
         <span class="fill">INKAI</span>
@@ -176,37 +179,34 @@
 
   <!-- PHOTO -->
   <div class="single-photo">
-    <img src="assets/images/Inkai_headphones_frontpage.png" alt="Inkai headphones" loading="lazy" decoding="async">
+    <img src="assets/images/Inkai_headphones_frontpage.png?v=20251103" alt="Inkai headphones" loading="lazy" decoding="async">
   </div>
 
   <!-- LISTEN -->
   <section id="listen" aria-labelledby="listen-title">
     <h2 id="listen-title">Listen</h2>
-    <p>
-      <a class="btn" href="https://soundcloud.com/inkaidj" target="_blank" rel="noopener" aria-label="Listen on SoundCloud">Listen on SoundCloud</a>
-    </p>
-    <div style="margin-top:18px; aspect-ratio:16/9; max-width:980px;">
+    <p><a class="btn" href="https://soundcloud.com/inkaidj" target="_blank" rel="noopener">Listen on SoundCloud</a></p>
+    <div style="margin-top:18px; aspect-ratio:16/9; max-width:var(--maxw);">
       <iframe title="Inkai on SoundCloud" width="100%" height="100%" loading="lazy"
-        scrolling="no" frameborder="no" allow="autoplay"
+        scrolling="no" frameborder="0" allow="autoplay"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/inkaidj&color=%23BF0426&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
       </iframe>
     </div>
   </section>
 
-  <!-- DATES (ex-TOUR) -->
+  <!-- DATES -->
   <section id="dates" aria-labelledby="dates-title">
     <h2 id="dates-title">Dates</h2>
-    <ul class="dates-list" aria-live="polite" style="max-width:980px;margin:0 auto;">
-      <li> <span class="date-item">TBA soon</span>
-      <!-- <li><span class="date-item">12.04.2025</span><span>Brussels — Café Central</span><a class="btn" href="#">Event</a></li> -->
+    <ul class="dates-list" aria-live="polite" style="max-width:var(--maxw);margin:0 auto;">
+      <li><span class="date-item">TBA soon</span><span>&nbsp;</span><span></span></li>
     </ul>
   </section>
 
   <!-- BOOKING -->
   <section id="booking" aria-labelledby="booking-title">
     <h2 id="booking-title">Booking & contact</h2>
-    <p class="lead" style="max-width:980px;margin:0 auto 18px;">For shows, press and management.</p>
-    <p style="max-width:980px;margin:0 auto;">
+    <p class="lead" style="max-width:var(--maxw);margin:0 auto 18px;">For shows, press and management.</p>
+    <p style="max-width:var(--maxw);margin:0 auto;">
       <strong>Manager / Booker:</strong> Antoine Roblin<br/>
       <a class="btn" href="mailto:inkaidj.management@gmail.com">inkaidj.management@gmail.com</a>
     </p>
