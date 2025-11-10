@@ -6,6 +6,8 @@
   <title>Inkaï DJ — Official Site</title>
   <meta name="description" content="Inkaï is a Siberian-born DJ and producer based between Brussels and Paris. Her universe blends hard techno, techno-trance and industrial textures with fast BPMs (145–160) and a hypnotic, visceral energy." />
   <meta property="og:site_name" content="Inkaï DJ" />
+
+  <!-- Favicon / logo -->
   <link rel="icon" href="assets/images/Inkai_headphones_frontpage.png?v=20251103" />
 
   <!-- Perf + cache-busting -->
@@ -20,113 +22,229 @@
       --inkai-ink:#BF0426;
       --text:#ffffff;
       --muted:#c9c9c9;
-      --maxw:980px;         /* largeur contenu */
+      --maxw:980px;
       --radius:14px;
     }
-    /* Titres Ethnocentric */
+
     @font-face{
       font-family:'Ethnocentric';
       src:url('assets/fonts/Ethnocentric-Regular.otf?v=20251103') format('opentype');
       font-display:swap;
     }
+
     html,body{
-      margin:0; padding:0; background:var(--inkai-black); color:var(--text);
+      margin:0; padding:0;
+      background:var(--inkai-black); color:var(--text);
       font-family: Inter, Roboto, Helvetica, Arial, system-ui, -apple-system, sans-serif;
-      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
-    /* ===== NAV (sobre, pas de "pills") ===== */
+    /* ===== NAV ===== */
     .nav{
       position:fixed; left:0; right:0; z-index:50;
       display:flex; justify-content:space-between; align-items:center;
-      padding:14px 24px; border-bottom:1px solid rgba(255,255,255,.08);
-      background: rgba(0,0,0,.55); backdrop-filter: blur(8px);
+      padding:14px 24px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(8px);
     }
     .nav a{
-      color:#fff; text-decoration:none; font-size:16px; letter-spacing:.02em;
-      padding:4px 6px; margin:0 16px; border-radius:6px;
-      transition:opacity .2s ease; opacity:.95;
+      color:#fff; text-decoration:none;
+      font-size:16px; letter-spacing:.02em;
+      padding:4px 6px;
+      margin:0 16px;
+      border-radius:6px;
+      opacity:.95;
+      transition:opacity .2s ease;
     }
     .nav a:hover{ opacity:1; }
-    .nav .right a{ margin-left:22px; }
     .nav .left a{ margin-right:22px; }
+    .nav .right a{ margin-left:22px; }
 
-    /* ===== HERO (vidéo + logo centré) ===== */
-    .hero{ padding-top:96px; padding-bottom:40px; }
+    /* ===== HERO (video + logo) ===== */
+    .hero{
+      padding-top:96px; /* pour dégager sous la nav */
+      padding-bottom:30px;
+    }
     .media-wrap{
-      position:relative; max-width:var(--maxw); margin:0 auto;
-      overflow:hidden; border-radius:var(--radius);
-      box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
+      position:relative;
+      max-width:var(--maxw);
+      margin:0 auto;
+      overflow:hidden;
+      border-radius:var(--radius);
+      box-shadow:0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
       background:#000;
     }
     .media-wrap video{
-      width:100%; height:auto; display:block;
-      object-fit:contain;           /* pas de crop */
+      width:100%;
+      height:auto;
+      display:block;
+      object-fit:contain;     /* pas de crop */
       background:#000;
     }
-    /* Logo centré au milieu de la vidéo */
-    .logo-overlay{
-      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-      width:100%; text-align:center; pointer-events:none;
-      font-family:'Ethnocentric', Inter, sans-serif;
-      font-size:clamp(42px, 11vw, 160px); line-height:.9; text-transform:uppercase;
-      mix-blend-mode:screen; filter: drop-shadow(0 8px 26px rgba(0,0,0,.7));
-    }
-    .logo-overlay .stroke{ color:transparent; -webkit-text-stroke:2px #fff; opacity:.95; }
-    .logo-overlay .fill{ color:#fff; opacity:.10; display:block; margin-top:-.1em; }
 
-    /* ===== Contenus ===== */
+    .logo-overlay{
+      position:absolute;
+      top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      width:100%;
+      text-align:center;
+      pointer-events:none;
+      font-family:'Ethnocentric', Inter, sans-serif;
+      font-size:clamp(42px,11vw,160px);
+      line-height:.9;
+      text-transform:uppercase;
+      mix-blend-mode:screen;
+      filter:drop-shadow(0 8px 26px rgba(0,0,0,.7));
+    }
+    .logo-overlay .stroke{
+      color:transparent;
+      -webkit-text-stroke:2px #fff;
+      opacity:.95;
+    }
+    .logo-overlay .fill{
+      color:#fff;
+      opacity:.10;
+      display:block;
+      margin-top:-.1em;
+    }
+
+    /* ===== MARQUEE INKAI ===== */
+    .marquee{
+      margin:14px auto 10px;
+      padding:10px 0;
+      overflow:hidden;
+      max-width:100%;
+      border-top:1px solid rgba(255,255,255,.06);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .marquee-track{
+      display:inline-flex;
+      gap:60px;
+      white-space:nowrap;
+      animation:marquee 18s linear infinite;
+    }
+    .marquee span{
+      font-family:'Ethnocentric', Inter, sans-serif;
+      font-size:clamp(22px,4vw,40px);
+      letter-spacing:.25em;
+      color:var(--inkai-ink);
+      opacity:.9;
+    }
+    @keyframes marquee{
+      0%{ transform:translateX(0); }
+      100%{ transform:translateX(-50%); }
+    }
+
+    /* ===== TITRES & TEXTES ===== */
     h1,h2,h3{
       font-family:'Ethnocentric', Inter, sans-serif;
-      text-transform:uppercase; letter-spacing:.04em; margin:14px 0;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      margin:14px 0;
     }
-    section{ max-width:var(--maxw); margin:26px auto; padding:0 20px; }
-    p{ line-height:1.7; margin:0 0 14px; }
-    .lead{ color:var(--muted); margin-top:6px; }
+    section{
+      max-width:var(--maxw);
+      margin:26px auto;
+      padding:0 20px;
+    }
+    p{
+      line-height:1.7;
+      margin:0 0 14px;
+    }
+    .lead{
+      color:var(--muted);
+      margin-top:6px;
+    }
 
-    /* Boutons dédiés (ne s’applique pas aux liens de nav/footer) */
+    /* ===== BUTTONS ===== */
     .btn{
-      display:inline-flex; align-items:center; gap:10px; cursor:pointer; text-decoration:none; color:#fff;
-      padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.18);
-      background: linear-gradient(180deg, rgba(191,4,38,.22), rgba(89,2,18,.22));
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
-      transition: transform .2s ease, border-color .2s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      cursor:pointer;
+      text-decoration:none;
+      color:#fff;
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.18);
+      background:linear-gradient(180deg, rgba(191,4,38,.22), rgba(89,2,18,.22));
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+      transition:transform .2s ease, border-color .2s ease;
     }
-    .btn:hover{ transform:translateY(-1px); border-color:rgba(255,255,255,.35); }
+    .btn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(255,255,255,.35);
+    }
 
-    /* Photo non-coupée */
-    .single-photo{ max-width:var(--maxw); margin:26px auto 90px; padding:0 20px; }
+    /* ===== PHOTO ===== */
+    .single-photo{
+      max-width:var(--maxw);
+      margin:26px auto 90px;
+      padding:0 20px;
+    }
     .single-photo img{
-      width:100%; height:auto; display:block;
+      width:100%;
+      height:auto;
+      display:block;
       border-radius:var(--radius);
-      box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
-      object-fit:contain;            /* pas de crop */
+      box-shadow:0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
+      object-fit:contain;
       background:#000;
     }
 
-    /* Dates */
-    .dates-list{ list-style:none; padding:0; margin:14px 0 0; border-top:1px solid rgba(255,255,255,.08); }
-    .dates-list li{
-      display:flex; gap:18px; justify-content:space-between; align-items:center;
-      border-bottom:1px solid rgba(255,255,255,.08); padding:16px 0;
+    /* ===== DATES ===== */
+    .dates-list{
+      list-style:none;
+      padding:0;
+      margin:14px 0 0;
+      border-top:1px solid rgba(255,255,255,.08);
     }
-    .date-item{ color:var(--muted); min-width:160px; font-variant-numeric: tabular-nums; }
+    .dates-list li{
+      display:flex;
+      gap:18px;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      padding:16px 0;
+    }
+    .date-item{
+      color:var(--muted);
+      min-width:160px;
+      font-variant-numeric:tabular-nums;
+    }
 
-    /* Footer (sobre) */
+    /* ===== FOOTER ===== */
     .nav-bottom{
-      position:fixed; left:0; right:0; bottom:0; z-index:40;
-      display:flex; justify-content:space-between; align-items:center;
-      padding:10px 18px; border-top:1px solid rgba(255,255,255,.08);
-      background: linear-gradient(0deg, rgba(0,0,0,.55), rgba(0,0,0,.15));
+      position:fixed;
+      left:0; right:0; bottom:0;
+      z-index:40;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:10px 18px;
+      border-top:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(0deg, rgba(0,0,0,.55), rgba(0,0,0,.15));
       font-size:12px;
     }
-    .nav-bottom .legal a{ color:#fff; opacity:.8; text-decoration:none; margin-right:12px; }
-    .nav-bottom .legal a:hover{ opacity:1; text-decoration:underline; }
-    .nav-bottom .copy{ opacity:.8; }
+    .nav-bottom .legal a{
+      color:#fff;
+      opacity:.8;
+      text-decoration:none;
+      margin-right:12px;
+    }
+    .nav-bottom .legal a:hover{
+      opacity:1;
+      text-decoration:underline;
+    }
+    .nav-bottom .copy{
+      opacity:.8;
+    }
     .spacer{ height:100px; }
   </style>
 
-  <!-- Logo/Name pour Google -->
+  <!-- Schema.org -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -152,11 +270,11 @@
     </div>
   </nav>
 
-  <!-- HERO: vidéo + logo centré -->
+  <!-- HERO -->
   <header class="hero" role="banner">
     <div class="media-wrap">
       <video
-        src="assets/images/Inkai_birth_frontpage.MOV?v=20251103"
+        src="assets/images/Inkai_birth_frontpage.mp4?v=20251103"
         autoplay muted loop playsinline preload="metadata"
         poster="assets/images/Inkai_headphones_frontpage.png?v=20251103"
         aria-label="Inkai teaser video">
@@ -167,6 +285,15 @@
       </div>
     </div>
   </header>
+
+  <!-- MARQUEE LOGO -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>INKAI</span><span>INKAI</span><span>INKAI</span><span>INKAI</span>
+      <span>INKAI</span><span>INKAI</span><span>INKAI</span><span>INKAI</span>
+      <span>INKAI</span><span>INKAI</span><span>INKAI</span><span>INKAI</span>
+    </div>
+  </div>
 
   <!-- BIO -->
   <section id="bio" aria-labelledby="bio-title">
@@ -185,7 +312,9 @@
   <!-- LISTEN -->
   <section id="listen" aria-labelledby="listen-title">
     <h2 id="listen-title">Listen</h2>
-    <p><a class="btn" href="https://soundcloud.com/inkaidj" target="_blank" rel="noopener">Listen on SoundCloud</a></p>
+    <p>
+      <a class="btn" href="https://soundcloud.com/inkaidj" target="_blank" rel="noopener">Listen on SoundCloud</a>
+    </p>
     <div style="margin-top:18px; aspect-ratio:16/9; max-width:var(--maxw);">
       <iframe title="Inkai on SoundCloud" width="100%" height="100%" loading="lazy"
         scrolling="no" frameborder="0" allow="autoplay"
