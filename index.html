@@ -10,7 +10,7 @@
   <!-- Favicon / logo -->
   <link rel="icon" href="assets/images/Inkai_headphones_frontpage.png?v=20251103" />
 
-  <!-- Perf + cache-busting -->
+  <!-- Perf + preload -->
   <link rel="preconnect" href="https://w.soundcloud.com" crossorigin>
   <link rel="preconnect" href="https://api.soundcloud.com" crossorigin>
   <link rel="preload" href="assets/fonts/Ethnocentric-Regular.otf?v=20251103" as="font" type="font/otf" crossorigin>
@@ -33,25 +33,33 @@
     }
 
     html,body{
-      margin:0; padding:0;
-      background:var(--inkai-black); color:var(--text);
+      margin:0;
+      padding:0;
+      background:var(--inkai-black);
+      color:var(--text);
       font-family: Inter, Roboto, Helvetica, Arial, system-ui, -apple-system, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
     }
 
     /* ===== NAV ===== */
     .nav{
-      position:fixed; left:0; right:0; z-index:50;
-      display:flex; justify-content:space-between; align-items:center;
+      position:fixed;
+      left:0; right:0;
+      z-index:50;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
       padding:14px 24px;
       border-bottom:1px solid rgba(255,255,255,.08);
-      background: rgba(0,0,0,.55);
-      backdrop-filter: blur(8px);
+      background:rgba(0,0,0,.55);
+      backdrop-filter:blur(8px);
     }
     .nav a{
-      color:#fff; text-decoration:none;
-      font-size:16px; letter-spacing:.02em;
+      color:#fff;
+      text-decoration:none;
+      font-size:16px;
+      letter-spacing:.02em;
       padding:4px 6px;
       margin:0 16px;
       border-radius:6px;
@@ -62,9 +70,9 @@
     .nav .left a{ margin-right:22px; }
     .nav .right a{ margin-left:22px; }
 
-    /* ===== HERO (video + logo) ===== */
+    /* ===== HERO (vidéo + logo centré) ===== */
     .hero{
-      padding-top:96px; /* pour dégager sous la nav */
+      padding-top:96px;   /* espace sous la nav */
       padding-bottom:30px;
     }
     .media-wrap{
@@ -73,14 +81,15 @@
       margin:0 auto;
       overflow:hidden;
       border-radius:var(--radius);
-      box-shadow:0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
+      box-shadow:0 10px 40px rgba(0,0,0,.35),
+                 inset 0 0 0 1px rgba(255,255,255,.05);
       background:#000;
     }
     .media-wrap video{
       width:100%;
       height:auto;
       display:block;
-      object-fit:contain;     /* pas de crop */
+      object-fit:contain;    /* pas de crop */
       background:#000;
     }
 
@@ -110,9 +119,9 @@
       margin-top:-.1em;
     }
 
-    /* ===== MARQUEE INKAI ===== */
+    /* ===== MARQUEE INKAI (logo principal répété) ===== */
     .marquee{
-      margin:14px auto 10px;
+      margin:0 auto 18px;
       padding:10px 0;
       overflow:hidden;
       max-width:100%;
@@ -123,18 +132,20 @@
       display:inline-flex;
       gap:60px;
       white-space:nowrap;
-      animation:marquee 18s linear infinite;
+      animation:marquee 22s linear infinite;
     }
     .marquee span{
       font-family:'Ethnocentric', Inter, sans-serif;
-      font-size:clamp(22px,4vw,40px);
+      font-size:clamp(24px,4vw,40px);
       letter-spacing:.25em;
-      color:var(--inkai-ink);
+      text-transform:uppercase;
+      color:transparent;
+      -webkit-text-stroke:1.5px #ffffff;
       opacity:.9;
     }
     @keyframes marquee{
-      0%{ transform:translateX(0); }
-      100%{ transform:translateX(-50%); }
+      0%   { transform:translateX(0); }
+      100% { transform:translateX(-50%); }
     }
 
     /* ===== TITRES & TEXTES ===== */
@@ -189,7 +200,8 @@
       height:auto;
       display:block;
       border-radius:var(--radius);
-      box-shadow:0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
+      box-shadow:0 10px 40px rgba(0,0,0,.35),
+                 inset 0 0 0 1px rgba(255,255,255,.05);
       object-fit:contain;
       background:#000;
     }
@@ -274,9 +286,13 @@
   <header class="hero" role="banner">
     <div class="media-wrap">
       <video
-        src="assets/images/Inkai_birth_frontpage.MOV"
-        autoplay muted loop playsinline preload="metadata"
-        poster="assets/images/Inkai_headphones_frontpage.png"
+        src="assets/images/Inkai_birth_frontpage.MOV?v=20251103"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="assets/images/Inkai_headphones_frontpage.png?v=20251103"
         aria-label="Inkai teaser video">
       </video>
       <div class="logo-overlay" aria-hidden="true">
@@ -286,7 +302,7 @@
     </div>
   </header>
 
-  <!-- MARQUEE LOGO -->
+  <!-- MARQUEE : INKAI répété -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track">
       <span>INKAI</span><span>INKAI</span><span>INKAI</span><span>INKAI</span>
@@ -306,18 +322,26 @@
 
   <!-- PHOTO -->
   <div class="single-photo">
-    <img src="assets/images/Inkai_headphones_frontpage.png" alt="Inkai headphones" loading="lazy" decoding="async">
+    <img src="assets/images/Inkai_headphones_frontpage.png?v=20251103"
+         alt="Inkai headphones" loading="lazy" decoding="async">
   </div>
 
   <!-- LISTEN -->
   <section id="listen" aria-labelledby="listen-title">
     <h2 id="listen-title">Listen</h2>
     <p>
-      <a class="btn" href="https://soundcloud.com/inkaidj" target="_blank" rel="noopener">Listen on SoundCloud</a>
+      <a class="btn" href="https://soundcloud.com/inkaidj" target="_blank" rel="noopener">
+        Listen on SoundCloud
+      </a>
     </p>
     <div style="margin-top:18px; aspect-ratio:16/9; max-width:var(--maxw);">
-      <iframe title="Inkai on SoundCloud" width="100%" height="100%" loading="lazy"
-        scrolling="no" frameborder="0" allow="autoplay"
+      <iframe
+        title="Inkai on SoundCloud"
+        width="100%" height="100%"
+        loading="lazy"
+        scrolling="no"
+        frameborder="0"
+        allow="autoplay"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/inkaidj&color=%23BF0426&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
       </iframe>
     </div>
@@ -327,17 +351,25 @@
   <section id="dates" aria-labelledby="dates-title">
     <h2 id="dates-title">Dates</h2>
     <ul class="dates-list" aria-live="polite" style="max-width:var(--maxw);margin:0 auto;">
-      <li><span class="date-item">TBA soon</span><span>&nbsp;</span><span></span></li>
+      <li>
+        <span class="date-item">TBA soon</span>
+        <span>&nbsp;</span>
+        <span></span>
+      </li>
     </ul>
   </section>
 
   <!-- BOOKING -->
   <section id="booking" aria-labelledby="booking-title">
     <h2 id="booking-title">Booking & contact</h2>
-    <p class="lead" style="max-width:var(--maxw);margin:0 auto 18px;">For shows, press and management.</p>
+    <p class="lead" style="max-width:var(--maxw);margin:0 auto 18px;">
+      For shows, press and management.
+    </p>
     <p style="max-width:var(--maxw);margin:0 auto;">
       <strong>Manager / Booker:</strong> Antoine Roblin<br/>
-      <a class="btn" href="mailto:inkaidj.management@gmail.com">inkaidj.management@gmail.com</a>
+      <a class="btn" href="mailto:inkaidj.management@gmail.com">
+        inkaidj.management@gmail.com
+      </a>
     </p>
   </section>
 
